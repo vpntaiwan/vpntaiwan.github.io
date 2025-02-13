@@ -2356,6 +2356,8 @@ code {
   color: #6c757d;
 }
 
+.main-footer a {color: #fff;}
+
 #list .item {margin-bottom: 2rem;}
 #list .item h3 {font-size: 1.2rem;}
 .navbar-brand {font-size: 2.5rem;font-weight: bold;}
