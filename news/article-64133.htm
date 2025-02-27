@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-64133.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SDS-redis动态字符串</title>
+        <meta name="description" content="与C语言类似，redis自己创建了简单动态字符串SDS(Simple Dynamic String)即简单动态字符串，创建字符串类型的键值对，SDS表示字符串值，键值对的值为字符串对象 SDS用途可以" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-64133.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="SDS-redis动态字符串" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/53f78b9c970ace2489855cbbb106a5dd.webp" />
+        <meta property="og:release_date" content="2025-02-27T05:57:01" />
+    <meta property="og:updated_time" content="2025-02-27T05:57:01" />
+        <meta property="og:description" content="与C语言类似，redis自己创建了简单动态字符串SDS(Simple Dynamic String)即简单动态字符串，创建字符串类型的键值对，SDS表示字符串值，键值对的值为字符串对象 SDS用途可以" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SDS-redis动态字符串">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>SDS-redis动态字符串</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<p>与C语言类似，redis自己创建了简单动态字符串SDS(Simple Dynamic String)即简单动态字符串，创建字符串类型的键值对，SDS表示字符串值，键值对的值为字符串对象</p> <p>SDS用途可以做缓冲区，客户端状态输入缓冲，AOF持久化缓冲区等。</p> <h2>SDS结构及定义</h2> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> sdshdr{</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> len;</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">sds字符串的长度</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 255, 1)">free</span><span style="color: rgba(0, 0, 0, 1)">;</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 记录buff数组未使用的数组长度，为0则表示</span><span style="color: rgba(0, 0, 255, 1)">char</span><span style="color: rgba(0, 0, 0, 1)"> buff[];</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 字节数组，保存字符串,最后一个字节保存'\0'</span> }</pre> </div> <p>最后一个空字符不在SDS的len 属性。</p> <h2>SDS和C字符串区别</h2> <ol> <li>o(1)复杂度获取字符串长度。与C不同（O(N)），C不计入字符串长度需要遍历，而SDS有自己的len属性记录长度且有自己的api更新设置。</li> <li>缓冲区不会溢出。C的字符串不计入自身长度，所以分配内存都假设分配足够多内存，但是如果要修改更长的字符串就会溢出。之所以SDS为动态的就体现在这，在分配资源时，会检查空间是否满足修改的要求，不满足会扩展SDS修改要的大小，再进行修改。</li> <li>减少内存重分配。增长字符串C如果不重分配会缓冲区溢出，减少会内存重分配释放空间，造成内存泄漏。对于redis来说，这两操作较多，重分配次数多了性能会收到制约。</li> </ol> <ul> <li style="margin-left: 30px">空间先分配。修改扩展时会预分配额外未使用的空间。分两种情况。</li> </ul> <ol> <li style="margin-left: 60px">SDS修改之后长度小于1MB，free分配与len值相同的空间，总长度=len+len+1</li> <li style="margin-left: 60px">修改后的len大于1MB，则会分配1MB的未使用空间，实际总长度=len+1MB+1byte</li> </ol> <p style="margin-left: 60px">这样下次再修改会有足够的空间存储不用再重分配</p> <ul> <li style="margin-left: 30px">惰性空间释放。用于缩短字符串操作。当缩短字符串时，先不内存重分配回收多出的字节，用free记录这些字节属性，以便后续使用，比如增长字符串操作。</li> </ul> <p>　　SDS的buff数组保存二进制数据，文本数据以及二进制流。SDS还兼容部分c函数</p> <h2>SDS相关操作API</h2> <table class="reference"> <tbody> <tr> <td>1</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-set.html"  rel="nofollow">SET key value</a><br />设置指定 key 的值。</td> </tr> <tr> <td>2</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-get.html"  rel="nofollow">GET key</a><br />获取指定 key 的值。</td> </tr> <tr> <td>3</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-getrange.html"  rel="nofollow">GETRANGE key start end</a><br />返回 key 中字符串值的子字符</td> </tr> <tr> <td>4</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-getset.html"  rel="nofollow">GETSET key value</a><br />将给定 key 的值设为 value ，并返回 key 的旧值(old value)。</td> </tr> <tr> <td>5</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-getbit.html"  rel="nofollow">GETBIT key offset</a><br />对 key 所储存的字符串值，获取指定偏移量上的位(bit)。</td> </tr> <tr> <td>6</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-mget.html"  rel="nofollow">MGET key1 [key2..]</a><br />获取所有(一个或多个)给定 key 的值。</td> </tr> <tr> <td>7</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-setbit.html"  rel="nofollow">SETBIT key offset value</a><br />对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)。</td> </tr> <tr> <td>8</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-setex.html"  rel="nofollow">SETEX key seconds value</a><br />将值 value 关联到 key ，并将 key 的过期时间设为 seconds (以秒为单位)。</td> </tr> <tr> <td>9</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-setnx.html"  rel="nofollow">SETNX key value</a><br />只有在 key 不存在时设置 key 的值。</td> </tr> <tr> <td>10</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-setrange.html"  rel="nofollow">SETRANGE key offset value</a><br />用 value 参数覆写给定 key 所储存的字符串值，从偏移量 offset 开始。</td> </tr> <tr> <td>11</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-strlen.html"  rel="nofollow">STRLEN key</a><br />返回 key 所储存的字符串值的长度。</td> </tr> <tr> <td>12</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-mset.html"  rel="nofollow">MSET key value [key value ...]</a><br />同时设置一个或多个 key-value 对。</td> </tr> <tr> <td>13</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-msetnx.html"  rel="nofollow">MSETNX key value [key value ...]</a><br />同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。</td> </tr> <tr> <td>14</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-psetex.html"  rel="nofollow">PSETEX key milliseconds value</a><br />这个命令和 SETEX 命令相似，但它以毫秒为单位设置 key 的生存时间，而不是像 SETEX 命令那样，以秒为单位。</td> </tr> <tr> <td>15</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-incr.html"  rel="nofollow">INCR key</a><br />将 key 中储存的数字值增一。</td> </tr> <tr> <td>16</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-incrby.html"  rel="nofollow">INCRBY key increment</a><br />将 key 所储存的值加上给定的增量值（increment） 。</td> </tr> <tr> <td>17</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-incrbyfloat.html"  rel="nofollow">INCRBYFLOAT key increment</a><br />将 key 所储存的值加上给定的浮点增量值（increment） 。</td> </tr> <tr> <td>18</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-decr.html"  rel="nofollow">DECR key</a><br />将 key 中储存的数字值减一。</td> </tr> <tr> <td>19</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-decrby.html"  rel="nofollow">DECRBY key decrement</a><br />key 所储存的值减去给定的减量值（decrement） 。</td> </tr> <tr> <td>20</td> <td><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/redis/strings-append.html"  rel="nofollow">APPEND key value</a><br />如果 key 已经存在并且是一个字符串， APPEND 命令将指定的 value 追加到该 key 原来值（value）的末尾。</td> </tr> </tbody> </table> <h2>应用场景：</h2> <p>&nbsp;一般常用在需要计数的场景，比如用户的访问次数、热点文章的点赞转发数量等等。</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">计数器</span><span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span>:<span style="color: rgba(128, 0, 128, 1)">6379</span>&gt;<span style="color: rgba(0, 0, 255, 1)">set</span> number<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)"> OK</span><span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span>:<span style="color: rgba(128, 0, 128, 1)">6379</span>&gt;<span style="color: rgba(0, 0, 0, 1)"> incr number # 将 key 中储存的数字值增一 (integer)</span><span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span>:<span style="color: rgba(128, 0, 128, 1)">6379</span>&gt;<span style="color: rgba(0, 0, 255, 1)">get</span><span style="color: rgba(0, 0, 0, 1)"> number</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">2</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span>:<span style="color: rgba(128, 0, 128, 1)">6379</span>&gt;<span style="color: rgba(0, 0, 0, 1)"> decr number # 将 key 中储存的数字值减一 (integer)</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span>:<span style="color: rgba(128, 0, 128, 1)">6379</span>&gt;<span style="color: rgba(0, 0, 255, 1)">get</span><span style="color: rgba(0, 0, 0, 1)"> number</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">"</span></pre> </div> <p>参考：redis设计与实现</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-63512.htm">动物疫苗排名前十名品种 动物疫苗排名前十名品种有哪些</a></p>
+                                        <p>下一个：<a href="/news/article-64134.htm">宠物粮创意名字 宠物粮起名</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-62328.htm" title="免费宠物领养平台有哪些软件可以用的（宠物领养软件推荐）">免费宠物领养平台有哪些软件可以用的（宠物领养软件推荐）</a></li>
+                        <li class="py-2"><a href="/news/article-56569.htm" title="动物医院实践心得体会总结范文图片（动物医院社会实践总结）">动物医院实践心得体会总结范文图片（动物医院社会实践总结）</a></li>
+                        <li class="py-2"><a href="/news/article-58881.htm" title="JavaScript 对象的四种方式比较详解_javascript技巧">JavaScript 对象的四种方式比较详解_javascript技巧</a></li>
+                        <li class="py-2"><a href="/news/article-60558.htm" title="python代码模板">python代码模板</a></li>
+                        <li class="py-2"><a href="/news/article-59974.htm" title="宠物领养网免费平台有哪些公司的地址的简单介绍">宠物领养网免费平台有哪些公司的地址的简单介绍</a></li>
+                        <li class="py-2"><a href="/news/article-56124.htm" title="三国杀特殊牌（三国杀特殊牌制作软件）">三国杀特殊牌（三国杀特殊牌制作软件）</a></li>
+                        <li class="py-2"><a href="/news/article-62922.htm" title="宠福鑫动物医院怎么样可靠吗安全吗（宠福鑫动物医院中心总院）">宠福鑫动物医院怎么样可靠吗安全吗（宠福鑫动物医院中心总院）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-25-free-high-speed-nodes.htm" title="VPN台湾 | 2月25日22.3M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享">VPN台湾 | 2月25日22.3M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-20-free-v2ray-subscribe.htm" title="VPN台湾 | 2月20日19M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享">VPN台湾 | 2月20日19M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-59412.htm" title="我所在的城市有一家动物医院的英语怎么写（在我的城市有一家宠物医院的英语怎么说）">我所在的城市有一家动物医院的英语怎么写（在我的城市有一家宠物医院的英语怎么说）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
