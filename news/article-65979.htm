@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-65979.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>从零开始学Python(六):函数,模块和类的使用</title>
+        <meta name="description" content="从这章开始,我们不在使用sublime文本编译器进行编码了,主要是我们每次运行的使用还得去命令行执行pyhon *.py命令查看结果,操作比较麻烦.推荐大家使用Pycharm(具体安装使用教程大家度娘" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-65979.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="从零开始学Python(六):函数,模块和类的使用" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/ebd51953f061a0cb3c0fd36685d78b25.webp" />
+        <meta property="og:release_date" content="2025-03-02T09:38:38" />
+    <meta property="og:updated_time" content="2025-03-02T09:38:38" />
+        <meta property="og:description" content="从这章开始,我们不在使用sublime文本编译器进行编码了,主要是我们每次运行的使用还得去命令行执行pyhon *.py命令查看结果,操作比较麻烦.推荐大家使用Pycharm(具体安装使用教程大家度娘" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="从零开始学Python(六):函数,模块和类的使用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>从零开始学Python(六):函数,模块和类的使用</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>从这章开始,我们不在使用sublime文本编译器进行编码了,主要是我们每次运行的使用还得去命令行执行pyhon <em>*</em>.py命令查看结果,操作比较麻烦.推荐大家使用<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.jetbrains.com/pycharm/"  rel="nofollow">Pycharm</a>(具体安装使用教程大家度娘就可以了).python王牌编译器,谁用谁知道~!</p> <h3 id="python函数">Python函数</h3> <h4 id="定义">定义</h4> <p>函数是组织好的,可重复利用的,用来实现单一,或相关联功能的代码片段. <br /> 函数能提高应用的模块行,使代码逻辑更加的条理清晰.</p> <h4 id="内建函数">内建函数</h4> <p>内建函数是Python中自带的,可供用户重复使用的一类单一功能的函数,比如我们常用的print函数,就属于内建函数.</p> <h4 id="自定义函数">自定义函数</h4> <p>Python中除了内建函数外,我们用的最多的就是自定义函数了,我们可以根据我们的代码功能,把代码切割成一段段独立的功能函数.然后在需要使用的地方直接调用用即可. <br /> 自定义函数包含以下几个规则:</p> <ul> <li>函数带代码块以def开头,然后接函数名和()</li> <li>函数的参数放在()中</li> <li>函数代码的第一句可以可以使用文档字符串,用于对函数的说明</li> <li>函数内容都是以:起始,并且缩进</li> <li>return 是结束函数,用于函数值返回,当然如果你的函数不需要值返回,可以不写</li> </ul> <p>我们来看一个完整的例子</p> <pre><code>def maxNum(a,b):     """     比较两个值得大小,返回值大的那个     :param a:     :param b:     :return:     """      if a&gt;=b:         return a     else:         return b </code></pre> <p>上面例子中,我们自定义了一个名称叫maxNum的自定义函数,他的功能是传入两个值,它会返回更大的那个值,”“”“”双三引号中的内容是函数的注释说明,下面是代码逻辑.</p> <h5 id="函数的调用">函数的调用</h5> <p>我们定义了一个函数之后,当然需要使用啦,函数调用也非常简单,只需要调用他的方法名即可,可以再其他函数中调用,也可以直接调用 <br /> 如下例子:</p> <pre><code>def maxNum(a,b):     """     比较两个值得大小,返回值大的那个     :param a:     :param b:     :return:     """      if a&gt;=b:         return a     else:         return b     def readNum():   #在函数中调用了maxNum函数     a=101     b=102      m=maxNum(a,b)     print m    m=maxNum(101,102)   #直接调用 print m </code></pre> <p>上面例子直接运行会,系统会直接调用最下面的代码,输出102,</p> <h4 id="函数的导入">函数的导入</h4> <p>有时候,我们会在其他模块中用到另外一个模块中的函数,比如我们新建了一个test.py模块中的函数maxNum,然后又新建了一个fast.py模块,如果我们要在fast.py模块中使用test.py模块中的maxNum函数,就需要使用import test导入test.py模块</p> <p><strong>一个py文件就代表一个模块!!!!</strong></p> <p>举个例子:</p> <p>test.py模块代码 </p> <pre><code>#coding=utf-8   def maxNum(a,b):     """     比较两个值得大小,返回值大的那个     :param a:     :param b:     :return:     """      if a&gt;=b:         return a     else:         return b </code></pre> <p>fast.py模块代码</p> <pre><code>#coding=utf-8  import test    #方式一...可以直接导入模块,然后通过模块名.函数名调用 from test import *  #方式二...也可以通过from先找到模块,然后通过import导入模块中的所有函数  def fast():     a=200     b=300      m=test.maxNum(a,b)   #方式一导入时,必须先通过模块名,再调用函数名     m=maxNum(a,b)   #方式二导入时,可直接调用函数名      print m </code></pre> <p>我们认真看fast.py文件中的调用方式,主要有两种,import 和from..import,两种的区别都在例子中说明了,大家可以自己多试试体会一下.</p> <h4 id="python的类">Python的类</h4> <p>Python是一门面向对象的语言,和java或者oc一样,我们把一个类归为一个对象.如果你没有接触过相关的面向对象的语言,可能你还需要去找相关的知识补一下.以下我会简单的说明下.</p> <h4 id="类的定义">类的定义</h4> <p>类是用来描述一些具有相同类型或者属性方法的集合,我们把类的实例叫做一个对象. <br /> 下面举个例子以便大家理解</p> <p>比如定义一个人这个类,他有年龄,身高,性格等属性,还可能有一些挑水,砍柴等技能.当一个母亲生下一个人来的时候(相当于类的实例),我们就能够得到一个实际的对象,这个对象被赋予了前面说的那些属性.</p> <h4 id="类的几个概念">类的几个概念</h4> <ul> <li>类变量 ,(也叫全局变量)类的变量在对象中是公用的,类变量定义在类函数以外,类变量通常不作为实例对象使用.</li> <li>类函数,(也叫类方法)类中定义的函数,一般包含一定的功能</li> <li>成员变量,(也叫局部变量)成员变量一般的活动范围限于一个函数之中</li> <li>继承：即一个派生类（derived class）继承基类（base class）的字段和方法。 继承也允许把一个派生类的对象作为一个基类对象对待。 例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟”是一个（is-a）”关系（例图，Dog是一个Animal）。</li> <li>方法重写：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。</li> </ul> <h4 id="自定义类">自定义类</h4> <p>使用class关键字,接方法名来创建 <br /> 举例:</p> <pre><code>class student():     """     我是一个学生     """      def read(self):         """         我会读书          """         print 'read' </code></pre> <p>上面我们创建一个student的类,里面有个类函数read,我们可以通过类名.<strong>doc</strong>来查看函数说明(也就是双三引号部分的内容)</p> <h4 id="self关键字">self关键字</h4> <p>在上面创建的类的例子中,你可能会疑惑read函数中的self的含义,现在我们就来说明一下 <br /> self代表的是当前类的示例,也就是一个对象,通过他,我们可以在一个方法中调用类中的另外一个方法,有点类似于java中的this和oc中self. <br /> 举例:</p> <pre><code>class student():     """     我是一个学生     """      def read(self):         """         我会读书          """         print 'read'       def talk(self):         """         我会谈论         :return:         """         print 'talk'          self.read() </code></pre> <p>上面的例子中,我们需要在函数方法talk中调用函数方法read,但是要怎么调用呢,这时候self就是一个桥梁,我们通过self得到类的对象示例,从而得到他的对象和方法,再通过实例去调用read函数方法就可以了</p> <h4 id="类的实例">类的实例</h4> <p>在java或者oc中,一个类的实例往往会用到new关键字,但在Python中,类的实例直接使用类名()即可</p> <pre><code>s=student()  #student为类名,s为得到的类变量,也就是类的实例 </code></pre> <p>基本上,当我们得到一个类的实例的时候,基本就相当于得到了它的所有,我们可以通过实例调用他的函数方法,也可以通过实例调用他的全局变量.</p> <h4 id="python-类内置属性">Python 类内置属性</h4> <p>Python的中的类,不管是内置的还是自定义的,都包含一些共有的内置属性.</p> <pre><code>__dict__  :该属性会把整个类中的属性和数据组成一个字典返回 __doc__: 返回一个类的描述 __name__:返回类的类名 __moudle__ :返回类所在的模块名 __base__:返回一个所有父类构成的元组 </code></pre> <h3 id="qa">Q&amp;A</h3> <p>到这里,我们这一章就讲完了,其实对象是一个很广泛的定义,我们这里只是简单的介绍了一下他的使用,深入的了解需要我们在日后的开发中不断的去尝试,理解.</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-65367.htm">动物疫苗多少钱打一针河南省疫苗（动物疫苗多少钱打一针河南省疫苗接种）</a></p>
+                                        <p>下一个：<a href="/news/article-65980.htm">nohup: ignoring input and redirecting stderr to stdout报错</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-64745.htm" title="宠物食品加工厂手续怎么办理流程（宠物食品厂需要办什么手续）">宠物食品加工厂手续怎么办理流程（宠物食品厂需要办什么手续）</a></li>
+                        <li class="py-2"><a href="/news/article-61128.htm" title="宠物领养数据库设计论文（宠物领养网站的设计与实现）">宠物领养数据库设计论文（宠物领养网站的设计与实现）</a></li>
+                        <li class="py-2"><a href="/news/article-65367.htm" title="动物疫苗多少钱打一针河南省疫苗（动物疫苗多少钱打一针河南省疫苗接种）">动物疫苗多少钱打一针河南省疫苗（动物疫苗多少钱打一针河南省疫苗接种）</a></li>
+                        <li class="py-2"><a href="/news/article-65366.htm" title="动物医院申请条件有哪些呢（动物医院诊疗许可证办理）">动物医院申请条件有哪些呢（动物医院诊疗许可证办理）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-15-node-share-links.htm" title="VPN台湾 | 2月15日20.2M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享">VPN台湾 | 2月15日20.2M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-59974.htm" title="宠物领养网免费平台有哪些公司的地址的简单介绍">宠物领养网免费平台有哪些公司的地址的简单介绍</a></li>
+                        <li class="py-2"><a href="/news/article-56123.htm" title="动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）">动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-23-free-high-speed-nodes.htm" title="VPN台湾 | 2月23日19.5M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享">VPN台湾 | 2月23日19.5M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-57697.htm" title="上海宠物领养救助中心电话号码（上海宠物领养救助站）">上海宠物领养救助中心电话号码（上海宠物领养救助站）</a></li>
+                        <li class="py-2"><a href="/news/article-61717.htm" title="Java的引用和内存">Java的引用和内存</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
