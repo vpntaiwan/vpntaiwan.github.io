@@ -3,22 +3,22 @@
 
 
 <head>
-        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-69157.htm" />
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-70476.htm" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hive插入数据</title>
-        <meta name="description" content="1、创建完表之后，就可以插入数据了，在hive中，一般使用LOAD DATA插入数据，数据来源一般为两种，一种是从本地文件系统，第二种是从hadoop文件系统。基本语法如下： LOAD DATA [L" />
+    <title>webpack 执行npm run 时，因为版本依赖报的那些错</title>
+        <meta name="description" content="环境介绍 webpack 4.34.0 webpack-dev-server 3.7.0 报错 Error: invalid "instanceof" keyword value Promise   " />
         <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
 
     <meta name="author" content="VPN台湾 订阅链接节点中文网">
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-69157.htm" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-70476.htm" />
     <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
-    <meta property="og:title" content="Hive插入数据" />
-    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/c3492b78b904f8cccc5f4e0c2860afc4.webp" />
-        <meta property="og:release_date" content="2025-03-07T06:36:16" />
-    <meta property="og:updated_time" content="2025-03-07T06:36:16" />
-        <meta property="og:description" content="1、创建完表之后，就可以插入数据了，在hive中，一般使用LOAD DATA插入数据，数据来源一般为两种，一种是从本地文件系统，第二种是从hadoop文件系统。基本语法如下： LOAD DATA [L" />
+    <meta property="og:title" content="webpack 执行npm run 时，因为版本依赖报的那些错" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/64dcbb4ff582e6f7e4f8c9db6db7bb21.webp" />
+        <meta property="og:release_date" content="2025-03-09T09:46:54" />
+    <meta property="og:updated_time" content="2025-03-09T09:46:54" />
+        <meta property="og:description" content="环境介绍 webpack 4.34.0 webpack-dev-server 3.7.0 报错 Error: invalid "instanceof" keyword value Promise   " />
         
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -30,7 +30,7 @@
     <meta name="robots" content="max-image-preview:large" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Hive插入数据">
+    <meta name="apple-mobile-web-app-title" content="webpack 执行npm run 时，因为版本依赖报的那些错">
     <meta name="format-detection" content="telephone=no">
 
     <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
@@ -101,7 +101,7 @@
     <!-- Hero Section-->
     <section class="hero">
         <div class="container text-center">
-            <h1>Hive插入数据</h1>
+            <h1>webpack 执行npm run 时，因为版本依赖报的那些错</h1>
             <nav aria-label="breadcrumb" class="d-flex justify-content-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
@@ -116,10 +116,10 @@
             <div class="row" id="list">
                 <div class="col-md-9">
                                         <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
-                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>1、创建完表之后，就可以插入数据了，在hive中，一般使用LOAD DATA插入数据，数据来源一般为两种，一种是从本地文件系统，第二种是从hadoop文件系统。基本语法如下：</p> <pre class="prettyprint"><code class="hljs sql"><span class="hljs-operator"><span class="hljs-keyword">LOAD</span> DATA [<span class="hljs-keyword">LOCAL</span>] INPATH <span class="hljs-string">'filepath'</span> [OVERWRITE] <span class="hljs-keyword">INTO</span> <span class="hljs-keyword">TABLE</span> tablename[PARTITION (partcol1=val1,partcol2=val2,…)]</span></code></pre> <p>LOCAL是标识符指定本地路径,它是可选的; <br /> OVERWRITE 是可选的，覆盖表中的数据; <br /> PARTITION 也是可选的。 <br /> 测试： <br /> 将下列数据插入到employee表中，数据格式为每个字段中间使用tab分割，每行使用回车，存储到一个txt文件中，</p> <pre class="prettyprint"><code class="hljs cs"><span class="hljs-number">1201</span>    Gopal   <span class="hljs-number">45000</span>   Technical manager <span class="hljs-number">1202</span>    Manisha <span class="hljs-number">45000</span>   Proof reader <span class="hljs-number">1203</span>    lisong  <span class="hljs-number">50000</span>   what <span class="hljs-keyword">is</span> you <span class="hljs-number">1204</span>    xiaohau <span class="hljs-number">88888</span>   abcdefg <span class="hljs-number">1205</span>    xiaoming        <span class="hljs-number">99999</span>   hehehehe</code></pre> <p>执行导入语句：</p> <pre class="prettyprint"><code class="hljs sql"><span class="hljs-operator"><span class="hljs-keyword">LOAD</span> DATA <span class="hljs-keyword">LOCAL</span> INPATH <span class="hljs-string">'/home/hadoop/HivePy/employee.txt'</span> OVERWRITE <span class="hljs-keyword">INTO</span> <span class="hljs-keyword">TABLE</span> userdb.employee;</span></code></pre> <p>，然后查看结果得到： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/a86b4a939e09f29bc0bfeac4ea845092.jpg" alt="Hive插入数据"><br /> 2、使用python操作hive，插入数据，代码如下：</p> <pre class="prettyprint"><code class="hljs python"><span class="hljs-comment"># coding:utf-8</span> <span class="hljs-keyword">from</span> pyhive <span class="hljs-keyword">import</span> hive <span class="hljs-keyword">from</span> TCLIService.ttypes <span class="hljs-keyword">import</span> TOperationState  <span class="hljs-comment"># 打开hive连接</span> hiveConn = hive.connect(host=<span class="hljs-string">'192.168.83.135'</span>,port=<span class="hljs-number">11111</span>,username=<span class="hljs-string">'hadoop'</span>) cursor = hiveConn.cursor()  <span class="hljs-comment"># 执行sql语句</span> sql = <span class="hljs-string">''' LOAD DATA LOCAL INPATH '/home/hadoop/HivePy/employee.txt' OVERWRITE INTO TABLE userdbbypy.employee '''</span> cursor.execute(sql, async=<span class="hljs-keyword">True</span>)  <span class="hljs-comment"># 得到执行语句的状态</span> status = cursor.poll().operationState <span class="hljs-keyword">print</span> <span class="hljs-string">"status:"</span>,status  <span class="hljs-comment"># 关闭hive连接</span> cursor.close() hiveConn.close()</code></pre> <p>执行代码，运行程序后查询相关表，结果如图所示： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/da035b32565274a547e2cb16b38be03b.jpg" alt="Hive插入数据"></p> </p></div> 			                <div class="clearfix"></div>
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h4><a id="_0" rel="nofollow"></a>环境介绍</h4> <p>webpack 4.34.0<br /> webpack-dev-server 3.7.0</p> <h4><a id="_3" rel="nofollow"></a>报错</h4> <pre><code>Error: invalid "instanceof" keyword value Promise     at getConstructor (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv-keywords\keywords\instanceof.js:52:11)     at Ajv.compile (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv-keywords\keywords\instanceof.js:21:27)     at Object.useCustomRule (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\compile\index.js:275:26)     at Object.generate_custom [as code] (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\dotjs\custom.js:32:24)     at Object.generate_validate [as validate] (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\dotjs\validate.js:347:35)     at Object.generate_anyOf [as code] (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\dotjs\anyOf.js:34:27)     at generate_validate (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\dotjs\validate.js:347:35)     at localCompile (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\compile\index.js:87:22)     at Ajv.compile (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\compile\index.js:56:13)     at Ajv._compile (C:\Users\HAM-PC\AppData\Roaming\npm\node_modules\webpack\node_modules\ajv\lib\ajv.js:358:27) npm ERR! code ELIFECYCLE</code></pre> <h4><a id="_19" rel="nofollow"></a>解决方法</h4> <p>解决的方法我是网上找的，就是把webpack-server降低版本：</p> <pre><code>npm install webpack-dev-server@2.9.4 --save-dev</code></pre> <hr/> <h4><a id="_27" rel="nofollow"></a>环境介绍</h4> <p>webpack 4.34.0<br /> extract-text-webpack-plugin 3.4.0</p> <h4><a id="_30" rel="nofollow"></a>报错</h4> <pre><code>Error: Chunk.entrypoints: Use Chunks.groupsIterable and filter by instanceof Entrypoint instead     at Chunk.get (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Chunk.js:857:9)     at D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\extract-text-webpack-plugin\index.js:260:40     at Array.forEach (&lt;anonymous&gt;)     at ExtractTextPlugin.&lt;anonymous&gt; (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\extract-text-webpack-plugin\index.js:255:11)     at AsyncSeriesHook.eval [as callAsync] (eval at create (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\tapable\lib\HookCodeFactory.js:33:10), &lt;anonymous&gt;:7:1)     at AsyncSeriesHook.lazyCompileHook (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\tapable\lib\Hook.js:154:20)     at Compilation.seal (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Compilation.js:1244:27)     at compilation.finish.err (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Compiler.js:625:18)     at hooks.finishModules.callAsync.err (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Compilation.js:1167:4)     at AsyncSeriesHook.eval [as callAsync] (eval at create (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\tapable\lib\HookCodeFactory.js:33:10), &lt;anonymous&gt;:24:1)     at AsyncSeriesHook.lazyCompileHook (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\tapable\lib\Hook.js:154:20)     at Compilation.finish (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Compilation.js:1159:28)     at hooks.make.callAsync.err (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Compiler.js:622:17)     at _err0 (eval at create (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\tapable\lib\HookCodeFactory.js:33:10), &lt;anonymous&gt;:11:1)     at _addModuleChain (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Compilation.js:1091:12)     at processModuleDependencies.err (D:\开发项目目录\webstorm\testVeu\js\demon\node_modules\webpack\lib\Compilation.js:1003:9) npm ERR! code ELIFECYCLE</code></pre> <h4><a id="_53" rel="nofollow"></a>解决办法</h4> <pre><code>npm install --save-dev extract-text-webpack-plugin@next</code></pre> <hr/> <h4><a id="_58" rel="nofollow"></a>环境介绍</h4> <p>webpack 4.34.0<br /> vue-loader 15.7.0</p> <h4><a id="_61" rel="nofollow"></a>报错</h4> <pre><code>ERROR in ./app.vue?vue&amp;type=style&amp;index=0&amp;id=381730fa&amp;scoped=true&amp;lang=css&amp; 16:3 Module parse failed: Unexpected token (16:3) File was processed with these loaders:  * ./node_modules/vue-loader/lib/index.js You may need an additional loader to handle the result of these loaders.</code></pre> <h4><a id="_69" rel="nofollow"></a>解决</h4> <pre><code>npm install --save-dev vue-loader@14.2.4</code></pre> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
-                                        <p>上一个：<a href="/news/article-68493.htm">宠物粮加工厂加盟电话 宠物粮加工厂加盟电话号码</a></p>
-                                        <p>下一个：<a href="/news/article-69159.htm">动物医院诊疗系统有哪些类型（动物医院诊疗系统有哪些类型图片）</a></p>
+                                        <p>上一个：<a href="/news/article-69809.htm">动物疫苗出口（动物疫苗市场规模）</a></p>
+                                        <p>下一个：<a href="/news/article-70477.htm">兰州哪里卖电脑的多些（兰州电脑批发）</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -129,15 +129,15 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-2-28-node-share.htm" title="VPN台湾 | 2月28日19.8M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 2月28日19.8M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-3-6-clash-v2ray-ss-ssr.htm" title="VPN台湾 | 3月6日18.7M/S|免费VPN/V2ray/SSR/Shadowrocket/Clash免费节点订阅分享">VPN台湾 | 3月6日18.7M/S|免费VPN/V2ray/SSR/Shadowrocket/Clash免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-67861.htm" title="小动物注射疫苗证明怎么写（小动物注射疫苗证明怎么写范文）">小动物注射疫苗证明怎么写（小动物注射疫苗证明怎么写范文）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-2-20-free-v2ray-subscribe.htm" title="VPN台湾 | 2月20日19M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享">VPN台湾 | 2月20日19M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-56569.htm" title="动物医院实践心得体会总结范文图片（动物医院社会实践总结）">动物医院实践心得体会总结范文图片（动物医院社会实践总结）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-3-9-node-share.htm" title="VPN台湾 | 3月9日18.1M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享">VPN台湾 | 3月9日18.1M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-58882.htm" title="泰安泰宠食品有限公司（泰安泰宠食品有限公司电话）">泰安泰宠食品有限公司（泰安泰宠食品有限公司电话）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-3-3-free-subscribe-node.htm" title="VPN台湾 | 3月3日21.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 3月3日21.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-67238.htm" title="哪种钙片适合绝经后吃">哪种钙片适合绝经后吃</a></li>
+                        <li class="py-2"><a href="/news/article-65366.htm" title="动物医院申请条件有哪些呢（动物医院诊疗许可证办理）">动物医院申请条件有哪些呢（动物医院诊疗许可证办理）</a></li>
+                        <li class="py-2"><a href="/news/article-65979.htm" title="从零开始学Python(六):函数,模块和类的使用">从零开始学Python(六):函数,模块和类的使用</a></li>
+                        <li class="py-2"><a href="/news/article-57132.htm" title="学宠物医生报考哪个学校专科比较好考（学宠物医生上什么大专）">学宠物医生报考哪个学校专科比较好考（学宠物医生上什么大专）</a></li>
+                        <li class="py-2"><a href="/news/article-58263.htm" title="广州宠物猫领养中心地址电话是多少（广州市猫狗免费领养市场在哪里）">广州宠物猫领养中心地址电话是多少（广州市猫狗免费领养市场在哪里）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-18-free-high-speed-nodes.htm" title="VPN台湾 | 2月18日19.5M/S|免费VPN/V2ray/SSR/Clash/Shadowrocket免费节点订阅分享">VPN台湾 | 2月18日19.5M/S|免费VPN/V2ray/SSR/Clash/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-66610.htm" title="国家规定不允许喂流浪猫（喂流浪猫是积德吗）">国家规定不允许喂流浪猫（喂流浪猫是积德吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-v2ray-subscribe.htm" title="VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-69159.htm" title="动物医院诊疗系统有哪些类型（动物医院诊疗系统有哪些类型图片）">动物医院诊疗系统有哪些类型（动物医院诊疗系统有哪些类型图片）</a></li>
+                        <li class="py-2"><a href="/news/article-70476.htm" title="webpack 执行npm run 时，因为版本依赖报的那些错">webpack 执行npm run 时，因为版本依赖报的那些错</a></li>
                         <li class="py-2"><a href="/news/article-69809.htm" title="动物疫苗出口（动物疫苗市场规模）">动物疫苗出口（动物疫苗市场规模）</a></li>
                     </ul>
     </div>
@@ -150,7 +150,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
