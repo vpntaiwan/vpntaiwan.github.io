@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-71782.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>React中事件的写法总结</title>
+        <meta name="description" content="首先我们先查看官方规则或者官方文档的介绍，React的事件处理和DOM元素很相似，但是语法上是有不同的：  1、react事件采用驼峰命名法，而不是纯小写。驼峰命名法(camelCase)：命名的全部" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-71782.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="React中事件的写法总结" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/055c81aece16c385c00a2f7a1100eb37.webp" />
+        <meta property="og:release_date" content="2025-03-11T07:48:15" />
+    <meta property="og:updated_time" content="2025-03-11T07:48:15" />
+        <meta property="og:description" content="首先我们先查看官方规则或者官方文档的介绍，React的事件处理和DOM元素很相似，但是语法上是有不同的：  1、react事件采用驼峰命名法，而不是纯小写。驼峰命名法(camelCase)：命名的全部" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="React中事件的写法总结">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>React中事件的写法总结</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>首先我们先查看<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://link.zhihu.com/?target=https%3A//react.docschina.org/docs/handling-events.html"  rel="nofollow">官方规则或者官方文档的介绍</a>，React的事件处理和DOM元素很相似，但是语法上是有不同的：</p> <blockquote> <p>1、react事件采用驼峰命名法，而不是纯小写。<br /><strong>驼峰命名法</strong>(camelCase)：命名的全部全称， 首个单词全部小写后面每个单词的首字母大写。<br /> eg: getElementById onClick<br /> 2、使用JSX语法的时候需要传入一个函数作为事件处理函数， 而不是一个字符串</p> </blockquote> <p><strong>了解基本的以后 ， 下面我们利用九个例子来进行事件的巩固：</strong></p> <h2> <a id="1_11" rel="nofollow"></a><strong>1、普通匿名函数的直接绑定</strong><br /> </h2> <pre><code>按钮1 </code></pre> <p>给onClick后面直接绑定函数，点击以后，就会执行函数里面的内容。</p> <h2> <a id="2_19" rel="nofollow"></a>2、使用箭头函数代替匿名的绑定</h2> <pre><code class="prism language-html">&lt;button onClick={()=&gt;{        alert("点击触发匿名函数"); }}&gt;按钮2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>  </code></pre> <h2> <a id="3event_27" rel="nofollow"></a>3、箭头函数中获取事件源(等同于原生的event对象)</h2> <pre><code class="prism language-html">&lt;button onClick={(e)=&gt;{       e.target.style.color="red"; }}&gt;点击以后按钮就会变成红色<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>  </code></pre> <p>e就是默认的事件参数 e中的target表示事件发生的目标元素 点击以后按钮就会变成红色</p> <h2> <a id="4_37" rel="nofollow"></a>4、将匿名函数分离封装</h2> <pre><code class="prism language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token attr-value"><span class="token punctuation">=</span>{<!-- --></span>         <span class="token attr-name">this.show</span> <span class="token attr-name">}</span><span class="token punctuation">&gt;</span></span>点击调用外面的函数<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span> </code></pre> <p>点击按钮以后 触发外面声明的show方法 show方法定义如下</p> <pre><code class="prism language-js">  <span class="token function">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token operator">=</span><span class="token punctuation">{<!-- --></span>             num<span class="token punctuation">:</span><span class="token number">10</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span>       <span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"按钮4被点击 但是里面this会脱离上下文关系"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token function">alert</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//报错 this是undefined</span>     <span class="token punctuation">}</span>  </code></pre> <p>可以弹框提示 ， 但是会有this指向的问题 ， 接下来 我们看第五步的加强</p> <h2> <a id="5_this__64" rel="nofollow"></a>5、利用箭头函数 对this指向进行加强 改写的代码如下</h2> <pre><code class="prism language-html">&lt;button onClick={          this.show//参数问题就看第六点 }&gt;调用函数<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>  </code></pre> <p>点击以后num就能得到改变</p> <h2> <a id="6__75" rel="nofollow"></a>6、再来研究箭头函数中参数的问题 如果调用的时候带走参数</h2> <pre><code class="prism language-html">&lt;button onClick={//show6能带参数         ()=&gt;{               this.show6("我是参数")           } }&gt;调用带有参数的函数<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span> </code></pre> <p>方法定义的如下 show6为一个箭头函数， content就是形参 ，接受的值为我是参数</p> <pre><code class="prism language-js"> <span class="token function-variable function">show6</span><span class="token operator">=</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{<!-- --></span>         <span class="token function">alert</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span> </code></pre> <h2> <a id="7_93" rel="nofollow"></a>7、事件函数触发是带参数和事件源</h2> <pre><code class="prism language-html">  &lt;button onClick={//show7能带参数 还能带事件源          (e)=&gt;{                this.show7("7777",e);           }   }&gt;带走参数和事件源<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>  </code></pre> <p>show7中第二个参数e需要特别处理， 在(e)中声明 才能带出去， 不然e会是没有定义。</p> <p>方法的定义部分</p> <pre><code class="prism language-js">  <span class="token function-variable function">show7</span><span class="token operator">=</span><span class="token punctuation">(</span>content<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{<!-- --></span>         e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>innerHTML<span class="token operator">=</span> content<span class="token punctuation">;</span>   <span class="token punctuation">}</span> </code></pre> <p>content就是参数"7777" ，e就是事件源， 通过事件源可以找到目标元素， 然后更新里面的内容</p> <h2> <a id="8_bindbind_bindthis_116" rel="nofollow"></a>8、不使用箭头函数 使用bind加强(bind里面的第一个参数 表示bind前面函数声明里面this的指向)</h2> <pre><code class="prism language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token attr-value"><span class="token punctuation">=</span>{this.show8.bind(this)}</span><span class="token punctuation">&gt;</span></span>bind加强<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span> </code></pre> <p>方法定义的地方</p> <pre><code class="prism language-js"> <span class="token function">show8</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"bind绑定"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span> </code></pre> <h2> <a id="9bind__130" rel="nofollow"></a>9、改写bind 贴近官方推荐写法</h2> <pre><code class="prism language-html">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onClick</span><span class="token attr-value"><span class="token punctuation">=</span>{this.show9}</span> <span class="token punctuation">&gt;</span></span>bind写法<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span> </code></pre> <p>在show9定义中</p> <pre><code class="prism language-js"> <span class="token function">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token operator">=</span><span class="token punctuation">{<!-- --></span>             num<span class="token punctuation">:</span><span class="token number">10</span>         <span class="token punctuation">}</span>         <span class="token keyword">this</span><span class="token punctuation">.</span>show9 <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>show9<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//bind的提升 调用的写法和8就不一样了</span>     <span class="token punctuation">}</span>     <span class="token function">show9</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token function">alert</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>  </code></pre> <p><strong>总结:</strong></p> <p>react中事件的使用和原生的事件使用极其相似，我们需要解决，函数函数的声明和参数的传递 使用，根据自己的实际情况，合理使用就可以了，不管是箭头函数和普通函数，实际都是殊途同归。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-71114.htm">怎么找厂家拿一手货源纸尿裤柔丫（怎么找纸尿裤厂家直接拿货）</a></p>
+                                        <p>下一个：<a href="/news/article-71783.htm">狗粮制作加工厂家（狗粮制作加工厂家电话）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-56123.htm" title="动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）">动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）</a></li>
+                        <li class="py-2"><a href="/news/article-65979.htm" title="从零开始学Python(六):函数,模块和类的使用">从零开始学Python(六):函数,模块和类的使用</a></li>
+                        <li class="py-2"><a href="/news/article-67859.htm" title="动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）">动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-57131.htm" title="宠物狗衣服教程（宠物狗衣服教程视频）">宠物狗衣服教程（宠物狗衣服教程视频）</a></li>
+                        <li class="py-2"><a href="/news/article-65367.htm" title="动物疫苗多少钱打一针河南省疫苗（动物疫苗多少钱打一针河南省疫苗接种）">动物疫苗多少钱打一针河南省疫苗（动物疫苗多少钱打一针河南省疫苗接种）</a></li>
+                        <li class="py-2"><a href="/news/article-59975.htm" title="被家猫抓破皮出了一点点血需要打疫苗吗（被家猫抓破皮出了一点点血需要打疫苗吗）">被家猫抓破皮出了一点点血需要打疫苗吗（被家猫抓破皮出了一点点血需要打疫苗吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-21-clash-v2ray-ss-ssr.htm" title="VPN台湾 | 2月21日18.7M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享">VPN台湾 | 2月21日18.7M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-56569.htm" title="动物医院实践心得体会总结范文图片（动物医院社会实践总结）">动物医院实践心得体会总结范文图片（动物医院社会实践总结）</a></li>
+                        <li class="py-2"><a href="/news/article-58882.htm" title="泰安泰宠食品有限公司（泰安泰宠食品有限公司电话）">泰安泰宠食品有限公司（泰安泰宠食品有限公司电话）</a></li>
+                        <li class="py-2"><a href="/news/article-67238.htm" title="哪种钙片适合绝经后吃">哪种钙片适合绝经后吃</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
