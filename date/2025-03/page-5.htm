@@ -3,22 +3,21 @@
 
 
 <head>
-        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-73106.htm" />
+        <link rel="canonical" href="https://vpntaiwan.github.io" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>django之使用supervisord 后台启动celery 服务(worker/beat)</title>
-        <meta name="description" content="Supervisor是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统，这篇文章主要介绍了python测试开发djang" />
+    <title>2025-03归档 - 第4页 - VPN台湾 订阅链接节点中文网</title>
+        <meta name="keywords" content="2025-03归档VPN台湾 订阅链接节点中文网" />
+        <meta name="description" content="2025-03归档，当前是第4页" />
         <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
 
     <meta name="author" content="VPN台湾 订阅链接节点中文网">
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-73106.htm" />
+    <meta property="og:type" content="webpage" />
+    <meta property="og:url" content="https://vpntaiwan.github.io" />
     <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
-    <meta property="og:title" content="django之使用supervisord 后台启动celery 服务(worker/beat)" />
-    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/e16f6d988548fc12be9b69962f4cf6e9.webp" />
-        <meta property="og:release_date" content="2025-03-13T09:22:41" />
-    <meta property="og:updated_time" content="2025-03-13T09:22:41" />
-        <meta property="og:description" content="Supervisor是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统，这篇文章主要介绍了python测试开发djang" />
+    <meta property="og:title" content="2025-03归档 - 第4页 - VPN台湾 订阅链接节点中文网" />
+    <meta property="og:image" content="/assets/website/img/todayclashnode/favicon.ico" />
+        <meta property="og:description" content="2025-03归档，当前是第4页" />
         
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -30,7 +29,7 @@
     <meta name="robots" content="max-image-preview:large" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="django之使用supervisord 后台启动celery 服务(worker/beat)">
+    <meta name="apple-mobile-web-app-title" content="2025-03归档 - 第4页 - VPN台湾 订阅链接节点中文网">
     <meta name="format-detection" content="telephone=no">
 
     <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
@@ -69,7 +68,7 @@
      crossorigin="anonymous"></script>
 </head>
 
-<body data-page="detail">
+<body data-page="category">
         <!-- navbar-->
     <header class="header">
         <nav class="navbar navbar-expand-lg fixed-top">
@@ -101,12 +100,11 @@
     <!-- Hero Section-->
     <section class="hero">
         <div class="container text-center">
-            <h1>django之使用supervisord 后台启动celery 服务(worker/beat)</h1>
+            <h1>2025-03 归档</h1>
             <nav aria-label="breadcrumb" class="d-flex justify-content-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
-                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
-                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                    <li aria-current="page" class="breadcrumb-item active">2025-03 归档</li>
                 </ol>
             </nav>
         </div>
@@ -114,14 +112,43 @@
     <section>
         <div class="container">
             <div class="row" id="list">
-                <div class="col-md-9">
-                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
-                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>Supervisor是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统，这篇文章主要介绍了python测试开发django之使用supervisord 后台启动celery 服务(worker/beat),需要的朋友可以参考下</p> <p>前言<br /> Supervisor（‘http://supervisord.org/’）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。<br /> 它可以很方便的监听、启动、停止、重启一个或多个进程。<br /> 用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。</p> <p>环境准备<br /> centos 安装 supervisord</p> <blockquote> <p>yum install -y epel-release &amp;&amp; yum install -y supervisor</p> </blockquote> <p>安装完成后在/etc/supervisor 目录下会有个配置文件 supervisord.conf<br /> 在项目中我们需要用到此配置，复制一份到项目根目录<br /> supervisord.conf文件内容编写, 前面内容不用改，直接接着在后面写<br /> 比如我需要后台启动celery的worker和beat服务</p> <pre><code>; Sample supervisor config file. ; ; For more information on the config file, please see: ; http://supervisord.org/configuration.html   ; 前面文档省略，不用删，接着后面写   [program:celery-worker] command=celery -A hrun2_web worker -l info ; 管理命令，supervisor不支持后台进程 process_name=%(program_name)s #user=root                                 ;进程启动用户 autostart=true                           ;是否随supervisor启动 autorestart=true                         ;是否在挂了之后重启，意外关闭后会重启，比如kill掉！ startretries=3                           ;启动尝试次数 stderr_logfile=./celery_worker.log           ;标准输出文件 stdout_logfile=./celery_worker.log        ;标准输出文件 loglevel=info                            ;日志的级别     [program:celery-beat] command=celery -A hrun2_web beat ; 管理命令，supervisor不支持后台进程 process_name=%(program_name)s #user=root                                 ;进程启动用户 autostart=true                           ;是否随supervisor启动 autorestart=true                         ;是否在挂了之后重启，意外关闭后会重启，比如kill掉！ startretries=3                           ;启动尝试次数 stderr_logfile=./celery_beat.log          ;标准输出文件 stdout_logfile=./celery_beat.log        ;标准输出文件 loglevel=info                            ;日志的级别 </code></pre> <p>启动服务</p> <blockquote> <p>supervisord -c /path/supervisord.conf</p> </blockquote> <p>关闭服务</p> <blockquote> <p>supervisorctl shutdown</p> </blockquote> <p>查看启动的服务</p> <blockquote> <p>supervisorctl status</p> </blockquote> <p>执行结果如下</p> <pre><code>root@13107c465557:/code# supervisorctl status celery-worker RUNNING pid 234, uptime 0:00:14 celery-beat RUNNING pid 235, uptime 0:00:14 </code></pre> <p>说明启动了celery和celery-beat两个服务</p> <p>查看日志<br /> 我们在配置里面指定了./celery_worker.log 文件保存运行日志，所以可以直接查看这个文件</p> <blockquote> <p>tail -f celery_worker.log -n 30</p> </blockquote></div> 			                <div class="clearfix"></div>
-                <div class="col-md-12 mt-5">
-                                        <p>上一个：<a href="/news/article-72436.htm">宠物店亏钱吗（宠物店会亏本吗）</a></p>
-                                        <p>下一个：<a href="/news/article-73107.htm">TensorFlow tensor的类型和形状转化</a></p>
-                                    </div>
+                <div class="col-md-9 xcblog-blog-list">
+                                        <div class="row item xcblog-blog-item" data-date="2025-03-01">
+                        <div class="col-md-3">
+                            <a href="/news/article-65366.htm" class="xcblog-blog-url">
+                                <img src="/uploads/20240614/36a82a9aa6aed3e34b628f0033f5b100.webp" alt="动物医院申请条件有哪些呢（动物医院诊疗许可证办理）" class="divider-image img-fluid"></a>
+                        </div>
+                        <div class="col-md-9">
+                            <a href="/news/article-65366.htm" class="xcblog-blog-url">
+                                <h3 class="divider-heading xcblog-blog-title">
+                                    动物医院申请条件有哪些呢（动物医院诊疗许可证办理）                                </h3>
+                            </a>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <p class="lead divider-subtitle mt-2 text-muted">摘要：       本篇文章给大家谈谈动物医院申请条件有哪些呢，以及动物医院诊疗许可证办理对应的知识点，希望对各位有所帮助，不要忘了收藏本站喔。本文目录一览：1、开兽医店需要什么条件...      </p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="row item xcblog-blog-item" data-date="2025-03-01">
+                        <div class="col-md-3">
+                            <a href="/free-nodes/2025-3-1-clash-v2ray-ss-ssr.htm" class="xcblog-blog-url">
+                                <img src="/uploads/20240614/a24bb66a4ee4114343797725073bb34a.webp" alt="VPN台湾 | 3月1日20.5M/S|免费VPN/SSR/V2ray/Clash/Shadowrocket免费节点订阅分享" class="divider-image img-fluid"></a>
+                        </div>
+                        <div class="col-md-9">
+                            <a href="/free-nodes/2025-3-1-clash-v2ray-ss-ssr.htm" class="xcblog-blog-url">
+                                <h3 class="divider-heading xcblog-blog-title">
+                                    VPN台湾 | 3月1日20.5M/S|免费VPN/SSR/V2ray/Clash/Shadowrocket免费节点订阅分享                                </h3>
+                            </a>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <p class="lead divider-subtitle mt-2 text-muted">这一次的节点更新覆盖了美国、加拿大、日本、韩国、欧洲、香港、新加坡等地区,最高速度可达20.5 M/S。只需复制下方的Clash/v2ray订阅链接,在客户端添加后即可正常使用。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul class="pagination"><li><a href="/date/2025-03/page-4.htm">&laquo;</a></li> <li><a href="/date/2025-03/">1</a></li><li><a href="/date/2025-03/page-2.htm">2</a></li><li><a href="/date/2025-03/page-3.htm">3</a></li><li><a href="/date/2025-03/page-4.htm">4</a></li><li class="active"><span>5</span></li> <li class="disabled"><span>&raquo;</span></li></ul>                </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
     <div class="panel-heading">
@@ -129,16 +156,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-71114.htm" title="怎么找厂家拿一手货源纸尿裤柔丫（怎么找纸尿裤厂家直接拿货）">怎么找厂家拿一手货源纸尿裤柔丫（怎么找纸尿裤厂家直接拿货）</a></li>
-                        <li class="py-2"><a href="/news/article-61129.htm" title="猫三联一共几针,多少钱济南（猫三联一针是什么意思）">猫三联一共几针,多少钱济南（猫三联一针是什么意思）</a></li>
-                        <li class="py-2"><a href="/news/article-62921.htm" title="类和对象的学习心得">类和对象的学习心得</a></li>
-                        <li class="py-2"><a href="/news/article-72435.htm" title="被猫抓了一下轻微破皮要打针吗要打几针（被猫抓了一下轻微破皮要打针吗要打几针才能好）">被猫抓了一下轻微破皮要打针吗要打几针（被猫抓了一下轻微破皮要打针吗要打几针才能好）</a></li>
-                        <li class="py-2"><a href="/news/article-64745.htm" title="宠物食品加工厂手续怎么办理流程（宠物食品厂需要办什么手续）">宠物食品加工厂手续怎么办理流程（宠物食品厂需要办什么手续）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-3-11-free-subscribe-node.htm" title="VPN台湾 | 3月11日19.6M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享">VPN台湾 | 3月11日19.6M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-65980.htm" title="nohup: ignoring input and redirecting stderr to stdout报错">nohup: ignoring input and redirecting stderr to stdout报错</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-2-20-free-v2ray-subscribe.htm" title="VPN台湾 | 2月20日19M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享">VPN台湾 | 2月20日19M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-60558.htm" title="python代码模板">python代码模板</a></li>
+                        <li class="py-2"><a href="/news/article-65367.htm" title="动物疫苗多少钱打一针河南省疫苗（动物疫苗多少钱打一针河南省疫苗接种）">动物疫苗多少钱打一针河南省疫苗（动物疫苗多少钱打一针河南省疫苗接种）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-28-node-share.htm" title="VPN台湾 | 2月28日19.8M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 2月28日19.8M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-69159.htm" title="动物医院诊疗系统有哪些类型（动物医院诊疗系统有哪些类型图片）">动物医院诊疗系统有哪些类型（动物医院诊疗系统有哪些类型图片）</a></li>
+                        <li class="py-2"><a href="/news/article-69809.htm" title="动物疫苗出口（动物疫苗市场规模）">动物疫苗出口（动物疫苗市场规模）</a></li>
+                        <li class="py-2"><a href="/news/article-63512.htm" title="动物疫苗排名前十名品种 动物疫苗排名前十名品种有哪些">动物疫苗排名前十名品种 动物疫苗排名前十名品种有哪些</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-v2ray-subscribe.htm" title="VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-18-free-high-speed-nodes.htm" title="VPN台湾 | 2月18日19.5M/S|免费VPN/V2ray/SSR/Clash/Shadowrocket免费节点订阅分享">VPN台湾 | 2月18日19.5M/S|免费VPN/V2ray/SSR/Clash/Shadowrocket免费节点订阅分享</a></li>
                         <li class="py-2"><a href="/news/article-62328.htm" title="免费宠物领养平台有哪些软件可以用的（宠物领养软件推荐）">免费宠物领养平台有哪些软件可以用的（宠物领养软件推荐）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-24-free-node-subscribe.htm" title="VPN台湾 | 2月24日22.8M/S|免费VPN/V2ray/Clash/SSR/Shadowrocket免费节点订阅分享">VPN台湾 | 2月24日22.8M/S|免费VPN/V2ray/Clash/SSR/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-64134.htm" title="宠物粮创意名字 宠物粮起名">宠物粮创意名字 宠物粮起名</a></li>
                     </ul>
     </div>
 </div>

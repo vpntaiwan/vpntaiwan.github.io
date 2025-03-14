@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-73774.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MySQL进阶 explain 执行计划详解</title>
+        <meta name="description" content="MySQL进阶之 explain 执行计划的应用  1、什么是 explain 2、explain 能干啥 3、explain 怎么使用 4、各字段的解释   id 字段 select_type 字段" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-73774.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="MySQL进阶 explain 执行计划详解" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/45b57215f053760059432b977f91562c.webp" />
+        <meta property="og:release_date" content="2025-03-14T07:06:45" />
+    <meta property="og:updated_time" content="2025-03-14T07:06:45" />
+        <meta property="og:description" content="MySQL进阶之 explain 执行计划的应用  1、什么是 explain 2、explain 能干啥 3、explain 怎么使用 4、各字段的解释   id 字段 select_type 字段" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MySQL进阶 explain 执行计划详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>MySQL进阶 explain 执行计划详解</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>MySQL进阶之 explain 执行计划的应用</h3> <ul> <li><a href="#1_explain_2" rel="nofollow">1、什么是 explain</a></li> <li><a href="#2explain__8" rel="nofollow">2、explain 能干啥</a></li> <li><a href="#3explain__19" rel="nofollow">3、explain 怎么使用</a></li> <li><a href="#4_27" rel="nofollow">4、各字段的解释</a></li> <li> <ul> <li><a href="#id__28" rel="nofollow">id 字段</a></li> <li><a href="#select_type__51" rel="nofollow">select_type 字段</a></li> <li><a href="#table__85" rel="nofollow">table 字段</a></li> <li><a href="#type__88" rel="nofollow">type 字段</a></li> <li><a href="#possible_key__139" rel="nofollow">possible_key 字段</a></li> <li><a href="#key__147" rel="nofollow">key 字段</a></li> <li><a href="#key_len__169" rel="nofollow">key_len 字段</a></li> <li><a href="#ref__184" rel="nofollow">ref 字段</a></li> <li><a href="#rows__195" rel="nofollow">rows 字段</a></li> <li><a href="#Extra__210" rel="nofollow">Extra 字段</a></li> </ul> </li> </ul> </div> </h1> <p>使用 explain 关键字可以模拟 MySQL 优化器执行 SQL 语句，从而知道 MySQL 是如何处理我们的 SQL 语句的。</p> <p>可以分析 SQL 查询语句或者表结构的性能瓶颈。</p> </h1> <ul> <li>显示表的读取顺序</li> <li>显示数据读取操作的类型</li> <li>显示哪些索引可以使用</li> <li>显示哪些索引被实际使用</li> <li>显示表之间的引用</li> <li>每张表有多少行被优化器查询</li> </ul> </h1> <p><code>explain + SQL 语句</code></p> <p>例如：<code>explain select * from tbl_emp;</code> SQL 语句的显示结果为：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/003cead1ebb1076df2d97735ca6be0c9.jpg" alt="MySQL进阶 explain 执行计划详解"></p> </h1> <h2><a id="id__28" rel="nofollow"></a>id 字段</h2> <p>作用：通过 id 字段来判断表的读取顺序</p> <p>其值有三种情况：</p> <ul> <li> <p>相同值</p> <ul> <li>所有的 id 相同时，从上到下顺序执行<br /> 例如：<code>explain select * from tbl_emp,tbl_dept where tbl_emp.deptId=tbl_dept.id;</code><br /> 执行结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/b25726e5c31f4d45c62dc30efcfaa490.jpg" alt="MySQL进阶 explain 执行计划详解"><br /> 最后 MySQL 优化器的 SQL 执行结果是，从上到下依次读取表 tbl_dept、tbl_emp。</li> </ul> </li> <li> <p>不同值</p> <ul> <li>id 值不同，如果是子查询，id 的序号会递增，id 值越大优先级越高，越先被执行<br /> 例如：<code>explain select * from tbl_emp where tbl_emp.deptId in (select id from tbl_dept);</code><br /> 执行结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/498e487461ee7cafe3f23ece929afae0.jpg" alt="MySQL进阶 explain 执行计划详解"><br /> 由于 id 值大的优先执行，所以最后 MySQL 优化器的 SQL 执行结果是，先读取表 tbl_dept，然后读取表 tbl_emp。</li> </ul> </li> <li> <p>既有相同值又有不同值</p> <ul> <li>先根据不同值，id 值越大的优先被执行，然后 id 值相同的，从上到下顺序执行</li> </ul> </li> </ul> <h2><a id="select_type__51" rel="nofollow"></a>select_type 字段</h2> <p>即数据读取操作的操作类型、查询类型，主要是用来区别<mark>普通查询、联合查询、子查询等复杂查询</mark>。</p> <p>其值有六种情况：</p> <ul> <li> <p>SIMPLE</p> <ul> <li>简单查询即查询语句中不含有子查询或者 UNION</li> </ul> </li> <li> <p>PRIMARY</p> <ul> <li>查询中包含复杂的子部分，最外层查询则被标记为 PRIMARY</li> </ul> </li> <li> <p>SUBQUERY</p> <ul> <li>在 SELECT 或 WHERE 列表中包含了子查询<br /> 例如：<code>explain select * from tbl_emp where tbl_emp.deptId in (select id from tbl_dept);</code><br /> 查询结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/d372b28e414b9afbd2ffa936facc4b74.jpg" alt="MySQL进阶 explain 执行计划详解"></li> </ul> </li> <li> <p>DERIVED</p> <ul> <li>在<strong>FROM 列表中包含的子查询</strong>被标记为 DERIVED（衍生），同时 MySQL 会递归执行这些子查询，把结果放到临时表里。<br /> 例如：<br /><code>explain select tbl_emp.*,d1.deptName from (select tbl_dept.* from tbl_dept) d1,tbl_emp where d1.id=tbl_emp.deptId;</code><br /> 查询结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/cf933642a448938a58d61333561a3315.jpg" alt="MySQL进阶 explain 执行计划详解"></li> </ul> </li> <li> <p>UNION</p> <ul> <li>若<strong>第二个 SELECT 出现在 UNION 之后</strong>，则被标记为 UNION；<br /> 若 UNION 包含在 FROM 语句的子查询中，外层 SELECT 将被标记为：DERIVED<br /> 例如：<br /><code>explain select * from tbl_emp e left join tbl_dept d on e.deptId=d.id</code><br /><code>union</code><br /><code>select * from tbl_emp e right join tbl_dept d on e.deptId=d.id;</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/90316bf99bfd355d79382031efe39439.jpg" alt="MySQL进阶 explain 执行计划详解"></li> </ul> </li> <li> <p>UNION RESULT</p> <ul> <li>从 UNION 表获取结果的 SELECT</li> </ul> </li> </ul> <h2><a id="table__85" rel="nofollow"></a>table 字段</h2> <p>显示<strong>这一行的数据是关于哪张表的</strong>。</p> <h2><a id="type__88" rel="nofollow"></a>type 字段</h2> <p><strong>显示查询使用了何种类型</strong>，是判断是否需要优化 SQL 的一个重要指标。（如果有上百万条记录，查询类型为 ALL ，则需要进行建立索引）</p> <p>访问类型值从最好到最坏排列：<br /> system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; range &gt; index &gt; ALL</p> <p>在工作中最常见的为以下几种类型：<br /><mark>system &gt; const &gt; eq_ref &gt; ref &gt; range &gt; index &gt; ALL</mark></p> <p>一般来说至少保证查询达到<strong>range</strong> 级别，最好能达到<strong>ref</strong> 级别。</p> <ul> <li> <p>system</p> <ul> <li>表只有一行记录（等同于系统表），是 const 类型的特例，平常不会出现，可以忽略不计。</li> </ul> </li> <li> <p>const</p> <ul> <li>表示通过索引一次就找到了，const 用来比较 PRIMARY KEY 或者 UNIQUE 索引。因为只匹配一行数据，所以很快。也就是说<strong>需要将主键或者唯一索引键置于 WHERE 列表中作为查询条件</strong>。<br /> 例如：将主键 id 作为子查询的查询条件：<br /><code>explain select * from (select * from tbl_emp where id=1) t1;</code><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/6d7d90e5526b3e981327512e2c6e654c.jpg" alt="MySQL进阶 explain 执行计划详解"></li> </ul> </li> <li> <p>eq_ref</p> <ul> <li> <p>唯一索引的扫描，对于每一个索引键，都只有一条记录与之匹配。常见于主键索引和唯一索引。</p> <p>例如：<code>explain select user.*,role.* from user,role where user.id=role.user_id;</code>（这里假设 user 表中得 user_name 的值不会重复）。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/ca415acdc989f358203f7dd8a147d338.jpg" alt="MySQL进阶 explain 执行计划详解"></p> </li> </ul> </li> <li> <p>ref</p> <ul> <li> <p>非唯一性索引扫描，返回匹配某个单独值的所有行。<br /> 本质上也是一种索引访问，它返回匹配某个单值的所有行，也就以为这它会找到多个符合条件的行，所以它属于查找和扫描的混合体。</p> <p>例如：<br /><code>alter table role add index index_userid_rolename(user_id,role_name);</code><br /><code>explain select * from role where role.user_id=1;</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/6979ad027451f612ba76568eab4e0087.jpg" alt="MySQL进阶 explain 执行计划详解"></p> </li> </ul> </li> <li> <p>range</p> <ul> <li> <p>只检索指定范围的行<br /> 一般就是在 where 语句中出现了 between、&lt; 、&gt;、in 等的查询<br /> 这种范围索引扫描比全表扫描要好，因为它只开始于索引的某一点，而结束于另一点，不用扫描全部索引。</p> <p>例如：<br /><code>explain select * from role where id between 1 and 3;</code><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/16055570234603efe9d98bcc77018ac9.jpg" alt="MySQL进阶 explain 执行计划详解"></p> </li> </ul> </li> <li> <p>inde</p> <ul> <li>全索引扫描。index 和 ALL 的区别为 index 类型只遍历索引树，也就是说虽然 all 和 index 都是读全表，但是 index 是从索引中读取，而 all 是从硬盘中读取。通常 index 比 ALL 快，因为 索引文件通常比数据文件小。<br /> 例如：<br /><code>explain select id from role;</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/2be99fbf183afdc6ed21d5b64ac7ccef.jpg" alt="MySQL进阶 explain 执行计划详解"></li> </ul> </li> <li> <p>ALL</p> <ul> <li>遍历全表找到匹配的行（也就意味着查询语句中没有使用到索引列）<br /> 例如：<br /><code>explain select * from role;</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/83d9aa875ec668015ec7b3ee9fcd87df.jpg" alt="MySQL进阶 explain 执行计划详解"></li> </ul> </li> </ul> <p><strong>有百万级别或者千万级别数据当出现 ALL 类型的查询语句时，就需要对查询语句进行优化。一般来说至少得保证查询达到 range 级别，最好能达到 ref 级别。</strong></p> <h2><a id="possible_key__139" rel="nofollow"></a>possible_key 字段</h2> <p>显示该条查询语句<strong>可能</strong>会用到的索引列。（但实际查询不一定会用到）</p> <p>例如：<br /><code>explain select * from role where id &gt; 2 and user_id &gt;2 ;</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/4c85f7a0cb93cc25344d0286ad1ad1f9.jpg" alt="MySQL进阶 explain 执行计划详解"></p> <h2><a id="key__147" rel="nofollow"></a>key 字段</h2> <p>显示该条查询语句<strong>实际</strong>上用到的索引列。</p> <p>如果 key 的值为 NULL 就说明要么没有建索引要么建了索引但是没有用也就是所谓的<strong>索引失效</strong>。</p> <p>查询中若使用到了<strong>覆盖索引</strong>（即在查询语句中，SELECT 所查询的列是符合索引的部分列或全部列，与顺序无关，同时不可使用 select *），则该索引只出现在 key 列表中。</p> <p>例如：</p> <pre><code class="prism language-java"><span class="token comment">// 首先建立符合索引</span> alter table role add index<span class="token function">index_userid_rolename</span><span class="token punctuation">(</span>user_id<span class="token punctuation">,</span>role_name<span class="token punctuation">)</span><span class="token punctuation">;</span>  explain select role_name from role<span class="token punctuation">;</span>  explain select role_name from role<span class="token punctuation">;</span>  explain select user_id<span class="token punctuation">,</span>role_name from role<span class="token punctuation">;</span>  explain select role_name<span class="token punctuation">,</span>user_id from role<span class="token punctuation">;</span></code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/102a13b935c50e52a6718ac27c87db71.jpg" alt="MySQL进阶 explain 执行计划详解"></p> <h2><a id="key_len__169" rel="nofollow"></a>key_len 字段</h2> <p><strong>表示索引中使用的字节数</strong>，可通过该列计算出查询中所使用的索引的长度，在不损失精度的情况下，长度越短越好。</p> <p>key_len 显示的值为索引的最大长度，并非实际使用长度。</p> <p>如果是单列索引， key_len 就是整个索引的长度；如果是符合索引，由于查询不一定会用到所有的列，所以用多少算多少。</p> <p>例如：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/5d5eb1a70dbac689f94bcc01bdff4903.jpg" alt="MySQL进阶 explain 执行计划详解"></p> <p><strong>同时 key_len 只计算 where 查询条件用到的索引长度，而排序和分组就算用到了索引，也不会计算到 key_len 中。</strong></p> <h2><a id="ref__184" rel="nofollow"></a>ref 字段</h2> <p>显示索引的哪一列被使用了，有可能是一个常数（const）。</p> <p>可以根据该字段，来分析表之间的引用。</p> <p>例如：</p> <pre><code class="prism language-java">explain  select<span class="token operator">*</span> from user left join role on user<span class="token punctuation">.</span>id<span class="token operator">=</span>role<span class="token punctuation">.</span>user_id<span class="token punctuation">;</span></code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/fc5f3691d72680b86516ef00f6832f4f.jpg" alt="MySQL进阶 explain 执行计划详解"></p> <h2><a id="rows__195" rel="nofollow"></a>rows 字段</h2> <p>根据表统计信息及索引选用情况，大致估算该条查询语句所要读取的数据行数。</p> <p>例如：</p> <pre><code class="prism language-java"><span class="token comment">// 没加索引前的查询</span> explain select<span class="token operator">*</span> from tbl_emp<span class="token punctuation">,</span>tbl_dept where tbl_emp<span class="token punctuation">.</span>deptId<span class="token operator">=</span>tbl_dept<span class="token punctuation">.</span>id and tbl_dept<span class="token punctuation">.</span>deptName<span class="token operator">=</span><span class="token string">'RD'</span><span class="token punctuation">;</span><span class="token comment">// 添加符合索引</span> alter table tbl_dept add index<span class="token function">index_deptName_locAdd</span><span class="token punctuation">(</span>deptName<span class="token punctuation">,</span>locAdd<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 添加索引后的查询</span> explain select<span class="token operator">*</span> from tbl_emp<span class="token punctuation">,</span>tbl_dept where tbl_emp<span class="token punctuation">.</span>deptId<span class="token operator">=</span>tbl_dept<span class="token punctuation">.</span>id and tbl_dept<span class="token punctuation">.</span>deptName<span class="token operator">=</span><span class="token string">'RD'</span><span class="token punctuation">;</span></code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/db7a93005ef245689c4b56620b49575b.jpg" alt="MySQL进阶 explain 执行计划详解"></p> <h2><a id="Extra__210" rel="nofollow"></a>Extra 字段</h2> <p>用来显示除了前面字段的其他<strong>额外的重要信息</strong>。（比如分组 Group By）</p> <p>其值有以下情况：</p> <ul> <li> <p><strong>Using filesort（重点）</strong></p> <ul> <li>优化器执行查询语句时，产生了<strong>文件类排序</strong>。（出现该信息，说明查询语句需要优化）</li> </ul> </li> <li> <p><strong>Using temporary（重点）</strong></p> <ul> <li>优化器执行查询语句时，使用临时表保存中间结果，MySQL在<strong>对查询结果排序时使用到了临时表</strong>。（出现该信息，说明查询语句及其需要优化）<br /> 例如：查询语句中通过符合索引（或部分列）分组</li> </ul> <pre><code class="prism language-java"><span class="token comment">// 通过符合索引的部分列排序</span> explain select user_id from role where user_id in<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> group by dept_id\<span class="token class-name">G</span><span class="token comment">// 通过符合索引的部分列排序</span> explain select user_id from role where user_id in<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> group by role_name<span class="token punctuation">,</span>dept_id\<span class="token class-name">G</span> explain select user_id from role where user_id in<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> group by user_id<span class="token punctuation">,</span>dept_id\<span class="token class-name">G</span>  explain select user_id from role where user_id in<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> group by user_id<span class="token punctuation">,</span>role_name\<span class="token class-name">G</span><span class="token comment">// 通过符合索引的全部列排序</span> explain select user_id from role where user_id in<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> group by user_id<span class="token punctuation">,</span>role_name<span class="token punctuation">,</span>dept_id\<span class="token class-name">G</span></code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/6d3e0bd66f2b823473f33381acfd87df.jpg" alt="MySQL进阶 explain 执行计划详解"><br /> 由此可见，当查询语句通过符合索引的列分组时，出现 Using filesort、Using temporary 信息，需要按照<strong>符合索引的</strong>前两列或者<strong>全部列</strong>进行分组即可完成其优化。</p> </li> <li> <p><strong>Using index（重点）</strong></p> <ul> <li>表明该执行该查询语句时使用到了覆盖索引（即在查询语句中，SELECT 所查询的列是符合索引的部分列或全部列，与顺序无关，同时不可使用 select *）。避免了访问表的数据，效率比较高。<br /> 如果<strong>同时出现 Using where</strong> ，表明索引被<strong>用来进行索引键值的查找</strong>，即索引列用在了 where 后面作为查询条件。<br /> 例如： <pre><code class="prism language-java">explain select user_id from role where user_id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span></code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/42b97026ae5d8615c5d624443d6a863f.jpg" alt="MySQL进阶 explain 执行计划详解"><br /> 如果<strong>没有出现 Using where</strong>，表明<strong>索引用来读取数据</strong>而非执行条件查询动作。也就是说在 select 中出现 符合索引的列，在 where 后没有使用到 符合索引的列。<br /> 例如：<code>explain select user_id,role_name from role;</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/0c59fc892e497a2fb092fc5ba172732d.jpg" alt="MySQL进阶 explain 执行计划详解"></li> </ul> </li> <li> <p>Using where</p> <ul> <li>表明使用了 where 过滤</li> </ul> </li> <li> <p>Using join buffer</p> <ul> <li>使用了连接缓存，即在查询语句中使用到了 join （注意左连接和右连接不会出现该信息）。<br /> 例如：</li> </ul> <pre><code class="prism language-java">explain select<span class="token operator">*</span> from user join role on user<span class="token punctuation">.</span>id<span class="token operator">=</span>role<span class="token punctuation">.</span>user_id<span class="token punctuation">;</span></code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/bc391097eb53547a11506a8f856d873f.jpg" alt="MySQL进阶 explain 执行计划详解"></p> </li> <li> <p>impossible where</p> <ul> <li>where 子句的值总是 false，不能用来获取任何元组。<br /> 例如：</li> </ul> <pre><code class="prism language-java">explain select<span class="token operator">*</span> from user where name<span class="token operator">=</span><span class="token string">'张三'</span> and name<span class="token operator">=</span><span class="token string">'王五'</span><span class="token punctuation">;</span></code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/1d1d4ce2d1b73f25e1bfe09b497de609.jpg" alt="MySQL进阶 explain 执行计划详解"></p> </li> <li> <p>select tables optimized away</p> <ul> <li>在没有 Group By 子句的情况下，基于索引优化 MIN/MAX 操作或者对于 MyISAM 存储引擎优化 COUNT(*) 操作，不必等到执行阶段再进行计算，查询执行计划生成的阶段即完成优化。</li> </ul> </li> <li> <p>distinct</p> <ul> <li>优化 distinct 操作，在找到第一个匹配的元组后立即停止查找同样值的操作。</li> </ul> </li> </ul> <p>Extra的 前三个值是重点，必须掌握，后三个值了解即可。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-73107.htm">TensorFlow tensor的类型和形状转化</a></p>
+                                        <p>下一个：<a href="/news/article-73775.htm">辽宁沈阳猫咪批发市场地址（沈阳最大猫市）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-56123.htm" title="动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）">动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）</a></li>
+                        <li class="py-2"><a href="/news/article-70476.htm" title="webpack 执行npm run 时，因为版本依赖报的那些错">webpack 执行npm run 时，因为版本依赖报的那些错</a></li>
+                        <li class="py-2"><a href="/news/article-61718.htm" title="天津宠物救助热线电话 天津宠物救助热线电话滨海新区">天津宠物救助热线电话 天津宠物救助热线电话滨海新区</a></li>
+                        <li class="py-2"><a href="/news/article-62327.htm" title="彻底搞定kubernetes远程访问">彻底搞定kubernetes远程访问</a></li>
+                        <li class="py-2"><a href="/news/article-59975.htm" title="被家猫抓破皮出了一点点血需要打疫苗吗（被家猫抓破皮出了一点点血需要打疫苗吗）">被家猫抓破皮出了一点点血需要打疫苗吗（被家猫抓破皮出了一点点血需要打疫苗吗）</a></li>
+                        <li class="py-2"><a href="/news/article-68492.htm" title="动物疫苗的使用方法视频教学大全图解（动物疫苗的作用）">动物疫苗的使用方法视频教学大全图解（动物疫苗的作用）</a></li>
+                        <li class="py-2"><a href="/news/article-69159.htm" title="动物医院诊疗系统有哪些类型（动物医院诊疗系统有哪些类型图片）">动物医院诊疗系统有哪些类型（动物医院诊疗系统有哪些类型图片）</a></li>
+                        <li class="py-2"><a href="/news/article-57698.htm" title="三国杀武将大合集2021（三国杀武将大合集奢华版）">三国杀武将大合集2021（三国杀武将大合集奢华版）</a></li>
+                        <li class="py-2"><a href="/news/article-59413.htm" title="宠物粮行业分析怎么写范文图片高清（宠物粮行业分析怎么写范文图片高清版）">宠物粮行业分析怎么写范文图片高清（宠物粮行业分析怎么写范文图片高清版）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-v2ray-subscribe.htm" title="VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">42</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
