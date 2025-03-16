@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-74441.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@Scheduled注解用法</title>
+        <meta name="description" content="项目开发中，经常会遇到定时任务的场景，Spring提供了@Scheduled注解，方便进行定时任务的开发，要使用@Scheduled注解，首先需要在启动类添加@EnableScheduling，启用S" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-74441.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="@Scheduled注解用法" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/0b1f74718f22ff648c6748b464438424.webp" />
+        <meta property="og:release_date" content="2025-03-15T07:21:01" />
+    <meta property="og:updated_time" content="2025-03-15T07:21:01" />
+        <meta property="og:description" content="项目开发中，经常会遇到定时任务的场景，Spring提供了@Scheduled注解，方便进行定时任务的开发，要使用@Scheduled注解，首先需要在启动类添加@EnableScheduling，启用S" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="@Scheduled注解用法">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>@Scheduled注解用法</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>项目开发中，经常会遇到定时任务的场景，Spring提供了<code>@Scheduled注解</code>，方便进行定时任务的开发，要使用<code>@Scheduled</code>注解，首先需要在启动类添加<code>@EnableScheduling</code>，启用Spring的<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://so.csdn.net/so/search?q=%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1&amp;spm=1001.2101.3001.7020"  title="计划任务" rel="nofollow">计划任务</a>执行功能，这样可以在容器中的任何Spring管理的bean上检测<code>@Scheduled</code>注解，执行计划任务&nbsp;</p> <p>关于@Scheduled注解我写了一个简单的demo</p> <p>只需要把修改注解里面的时间算法就行了</p> <pre><code>定时任务     @Autowired     private RedisLock redisLock;     @Scheduled(cron = "0 0 */3 * * ?")//定时任务注解     public void reportCurrentTime() {         //生成id         String id = UUID.randomUUID().toString();         try {             //加redis锁，每个定时器有自己的常量参数             boolean flag = redisLock.lock(id, RedisLock.OUTBREAK_LOCK_KEY);                    } catch (Exception e) {             e.printStackTrace();         } finally {             //解锁             redisLock.unlock(id, RedisLock.OUTBREAK_LOCK_KEY);                     }     }</code></pre> <p>&nbsp;以下是我总结的几个比较常用的时间算法</p> <p>每隔5秒执行一次： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Scheduled(cron = "*/5 * * * * ?")<br /> 每隔1分钟执行一次： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Scheduled(cron = "0 */1 * * * ?")<br /> 每天23点执行一次： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Scheduled(cron = "0 0 23 * * ?")<br /> 每天凌晨1点执行一次： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Scheduled(cron = "0 0 1 * * ?")<br /> 每月1号凌晨1点执行一次： &nbsp; &nbsp; &nbsp;@Scheduled(cron = "0 0 1 1 * ?")<br /> 每月最后一天23点执行一次： &nbsp; &nbsp; @Scheduled(cron = "0 0 23 L * ?")<br /> 每周星期天凌晨1点实行一次： &nbsp; &nbsp; @Scheduled(cron = "0 0 1 ? * L")<br /> 在26分、29分、33分执行一次： &nbsp; &nbsp; @Scheduled(cron = " 0 26,29,33 * * * ?")<br /> 每天的0点、13点、18点、21点都执行一次： &nbsp;@Scheduled(cron = " 0 0 0,13,18,21 * * ?")</p> <p>&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-73775.htm">辽宁沈阳猫咪批发市场地址（沈阳最大猫市）</a></p>
+                                        <p>下一个：<a href="/news/article-74443.htm">小猫10元一只去哪里买好（小猫10元一只去哪里买好呢）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-65979.htm" title="从零开始学Python(六):函数,模块和类的使用">从零开始学Python(六):函数,模块和类的使用</a></li>
+                        <li class="py-2"><a href="/news/article-64133.htm" title="SDS-redis动态字符串">SDS-redis动态字符串</a></li>
+                        <li class="py-2"><a href="/news/article-60559.htm" title="动物疫苗行业标准规范 动物疫苗行业标准规范最新">动物疫苗行业标准规范 动物疫苗行业标准规范最新</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-21-clash-v2ray-ss-ssr.htm" title="VPN台湾 | 2月21日18.7M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享">VPN台湾 | 2月21日18.7M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-62921.htm" title="类和对象的学习心得">类和对象的学习心得</a></li>
+                        <li class="py-2"><a href="/news/article-74441.htm" title="@Scheduled注解用法">@Scheduled注解用法</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-2-free-v2ray.htm" title="VPN台湾 | 3月2日22M/S|免费VPN/Shadowrocket/V2ray/SSR/Clash免费节点订阅分享">VPN台湾 | 3月2日22M/S|免费VPN/Shadowrocket/V2ray/SSR/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-72435.htm" title="被猫抓了一下轻微破皮要打针吗要打几针（被猫抓了一下轻微破皮要打针吗要打几针才能好）">被猫抓了一下轻微破皮要打针吗要打几针（被猫抓了一下轻微破皮要打针吗要打几针才能好）</a></li>
+                        <li class="py-2"><a href="/news/article-62922.htm" title="宠福鑫动物医院怎么样可靠吗安全吗（宠福鑫动物医院中心总院）">宠福鑫动物医院怎么样可靠吗安全吗（宠福鑫动物医院中心总院）</a></li>
+                        <li class="py-2"><a href="/news/article-59413.htm" title="宠物粮行业分析怎么写范文图片高清（宠物粮行业分析怎么写范文图片高清版）">宠物粮行业分析怎么写范文图片高清（宠物粮行业分析怎么写范文图片高清版）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
