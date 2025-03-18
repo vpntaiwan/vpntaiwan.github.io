@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-76478.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Docker 解决Error response from daemon</title>
+        <meta name="description" content="我在ubuntu16.04下安装好Docker后.要拉取时,出现以下错误: sudo docker pull scrapinghub/splash  Using default tag: latest" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-76478.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="Docker 解决Error response from daemon" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/7fb65a9fccfd8ec1bd6ff3b314c46dfc.webp" />
+        <meta property="og:release_date" content="2025-03-18T06:13:41" />
+    <meta property="og:updated_time" content="2025-03-18T06:13:41" />
+        <meta property="og:description" content="我在ubuntu16.04下安装好Docker后.要拉取时,出现以下错误: sudo docker pull scrapinghub/splash  Using default tag: latest" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Docker 解决Error response from daemon">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>Docker 解决Error response from daemon</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <h2>我在ubuntu16.04下安装好Docker后.要拉取时,出现以下错误:</h2> <h3>sudo docker pull scrapinghub/splash</h3> <p> Using default tag: latest<br /> Error response from daemon: Get https://registry-1.docker.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)</p> <p>解决方法:</p> <p>1,</p> <p>新版的 Docker 使用 /etc/docker/daemon.json（Linux）来配置 Daemon。</p> <p>请在该配置文件中加入（没有该文件的话，请先建一个）：</p> <p><img fetchpriority="high" decoding="async" alt="" class="has" height="243" src="http://img.555519.xyz/uploads3/20220605/39415cdbf88e7af06c2919f14c2ffaf1.jpg"></p> <p>我加入二个Docker镱源,第一个好用哦!!!</p> <p>还是不能pull,再进行下面2的操作</p> <p>2.</p> <p>解决方法如下：</p> <p><strong>第一步：</strong>通过<code>dig @114.114.114.114 registry-1.docker.io</code>找到可用IP</p> <p><img decoding="async" alt="" class="has" height="859" src="http://img.555519.xyz/uploads3/20220605/8aaef052ed3d064b8614072fcb84b407.jpg"></p> <p>重上次可以找到ANSWER SECTION:</p> <p>第二步：尝试修改<code>/etc/hosts</code>强制docker.io相关的域名解析到其它可用IP</p> <h3>vim /etc/hosts</h3> <p>我的hosts</p> <p><img decoding="async" alt="" class="has" height="574" src="http://img.555519.xyz/uploads3/20220605/bad4db5e306f0c88bae5697519ec4700.jpg"></p> <p>我打所有能用上的IP都加上去.</p> <p>3.保存,重试</p> <h3>sudo docker image pull library/hello-world</h3> <p><img loading="lazy" decoding="async" alt="" class="has" height="156" src="http://img.555519.xyz/uploads3/20220605/10c194144b8a3b4eb542b5b8252656cf.jpg"></p> <p>4. 验证</p> <h3>sudo&nbsp;docker image ls</h3> <p><img loading="lazy" decoding="async" alt="" class="has" height="102" src="http://img.555519.xyz/uploads3/20220605/67e31d2089498d275e1d34115e67ec8f.jpg"></p> <p>5.看到这个信息.成功！</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-75806.htm">南平免费领养狗狗（南平养狗要办狗证吗）</a></p>
+                                        <p>下一个：<a href="/news/article-76479.htm">中国十大宠物粮上市公司排名榜名单（中国十大宠物粮上市公司排名榜名单及图片）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-56569.htm" title="动物医院实践心得体会总结范文图片（动物医院社会实践总结）">动物医院实践心得体会总结范文图片（动物医院社会实践总结）</a></li>
+                        <li class="py-2"><a href="/news/article-70476.htm" title="webpack 执行npm run 时，因为版本依赖报的那些错">webpack 执行npm run 时，因为版本依赖报的那些错</a></li>
+                        <li class="py-2"><a href="/news/article-75127.htm" title="狂犬疫苗多少钱一针?（狂犬疫苗多少钱一针?打几针）">狂犬疫苗多少钱一针?（狂犬疫苗多少钱一针?打几针）</a></li>
+                        <li class="py-2"><a href="/news/article-61718.htm" title="天津宠物救助热线电话 天津宠物救助热线电话滨海新区">天津宠物救助热线电话 天津宠物救助热线电话滨海新区</a></li>
+                        <li class="py-2"><a href="/news/article-60559.htm" title="动物疫苗行业标准规范 动物疫苗行业标准规范最新">动物疫苗行业标准规范 动物疫苗行业标准规范最新</a></li>
+                        <li class="py-2"><a href="/news/article-56570.htm" title="动物疫苗多少钱打一针河南省（2021年河南动物疫苗中标公告）">动物疫苗多少钱打一针河南省（2021年河南动物疫苗中标公告）</a></li>
+                        <li class="py-2"><a href="/news/article-73106.htm" title="django之使用supervisord 后台启动celery 服务(worker/beat)">django之使用supervisord 后台启动celery 服务(worker/beat)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-13-node-share-links.htm" title="VPN台湾 | 3月13日19.6M/S|免费VPN/SSR/Clash/Shadowrocket/V2ray免费节点订阅分享">VPN台湾 | 3月13日19.6M/S|免费VPN/SSR/Clash/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-71113.htm" title="动物疫苗有哪些大厂家生产的呢多少钱一瓶（动物疫苗企业名单）">动物疫苗有哪些大厂家生产的呢多少钱一瓶（动物疫苗企业名单）</a></li>
+                        <li class="py-2"><a href="/news/article-59974.htm" title="宠物领养网免费平台有哪些公司的地址的简单介绍">宠物领养网免费平台有哪些公司的地址的简单介绍</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">54</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
