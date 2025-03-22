@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-79210.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>关于vue中api统一管理的那些事_vue.js_</title>
+        <meta name="description" content="目录  前情提要 针对小项目而言（没有单独二次封装axios）  无需管理，直接干。仅限于接口数量在20-30的 统一api.js文件管理  针对非小型项目而言（进行axios的二次封装）  api统" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-79210.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="关于vue中api统一管理的那些事_vue.js_" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/055c81aece16c385c00a2f7a1100eb37.webp" />
+        <meta property="og:release_date" content="2025-03-22T08:49:54" />
+    <meta property="og:updated_time" content="2025-03-22T08:49:54" />
+        <meta property="og:description" content="目录  前情提要 针对小项目而言（没有单独二次封装axios）  无需管理，直接干。仅限于接口数量在20-30的 统一api.js文件管理  针对非小型项目而言（进行axios的二次封装）  api统" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="关于vue中api统一管理的那些事_vue.js_">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>关于vue中api统一管理的那些事_vue.js_</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">前情提要</a></li> <li><a href="#_label1" rel="nofollow">针对小项目而言（没有单独二次封装axios）</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_1_0" rel="nofollow">无需管理，直接干。仅限于接口数量在20-30的</a></li> <li><a href="#_lab2_1_1" rel="nofollow">统一api.js文件管理</a></li> </ul> <li><a href="#_label2" rel="nofollow">针对非小型项目而言（进行axios的二次封装）</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_2_2" rel="nofollow">api统一管理 + 挂载到vue实例上 + 单模块</a></li> <li><a href="#_lab2_2_3" rel="nofollow">api统一管理 + 挂载到vue实例上 + 多模块</a></li> <li><a href="#_lab2_2_4" rel="nofollow">api统一管理 + vuex + 单模块</a></li> <li><a href="#_lab2_2_5" rel="nofollow">api统一管理 + vuex + 多模块</a></li> </ul> <li><a href="#_label3" rel="nofollow">总结</a></li> <ul class="second_class_ul"></ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>前情提要</h2> <p>正常写小项目的时候，关于请求接口的存放可能没有那么在意，毕竟纵观整个项目可能也就那么十几二十个接口，当出现问题进行定位的时候也能很轻松的定位到。</p> <p>但是当接口的数量达到百级的时候，出现接口调整等的问题时就会出现捉襟见肘的情况，再多点可能改一个api接口就要找好久。而且有的接口可能好多地方用，如果这个接口发生更好，好家伙，光修改个接口地址或者参数什么的就得要一两个小时，太影响效率和开发心情。</p> <p>此时将api模块解耦出来就显得尤为重要。现在收集到了api统一管理的几种方案，各有千秋，具体优劣还有待各位看官的探讨。</p> <blockquote> <p>针对的是vue脚手架项目，不是在html中引入vue的项目。</p> </blockquote> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>针对小项目而言（没有单独二次封装axios）</h2> <p class="maodian"><a name="_lab2_1_0" rel="nofollow"></a></p> <h3>无需管理，直接干。仅限于接口数量在20-30的</h3> <p>上代码：</p> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  import axios from 'axios';  export default {    methods: {      async request() {        let data = {}        try {          // host指的是请求的域名，path指的是请求的路径， data是相关的参数和请求头配置          let res = await axios.post(`${host}${path}`, {            data          })          console.log(res)        } catch(err) {          this.$message.error(err.message)        }      }    }  }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_lab2_1_1" rel="nofollow"></a></p> <h3>统一api.js文件管理</h3> <p>将所有的api的接口信息都写在一个js文件里去维护。页面接口请求直接引入即可</p> <ul> <li>在根目录下创建api文件夹，然后创建index.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">export default {    getInfo: 'https://xxx.x.com/getinfo'  }</pre> </div> <ul> <li>具体页面使用</li> </ul> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  import axios from 'axios';  import api from '@/api/index';  export default {    methods: {      async request() {        let data = {}        try {          let res = await axios.post(api.getInfo, {            data          })          console.log(res)        } catch(err) {          this.$message.error(err.message)        }              }    }  }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>针对非小型项目而言（进行axios的二次封装）</h2> <blockquote> <p>关于axios二次封装的问题在这里就不做过得赘述了，有小白不懂得可以联系我。</p> </blockquote> <p>对于接口数量超过50的来说，还是用上述的方式去请求接口，此时无论是对于维护还是升级而言都不是很友好，此时我们需要更便利的方案。</p> <p class="maodian"><a name="_lab2_2_2" rel="nofollow"></a></p> <h3>api统一管理 + 挂载到vue实例上 + 单模块</h3> <p>思路：在api统一管理时，不仅仅管理请求地址，而是直接写一个request的请求方法，通过接受一些参数来实现多变性。</p> <ul> <li>api/index.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">import request from '@/utils/axios'  export default {    getInfo(params) {      return request({        url: '/xxx/xxx/xxx',        method: 'post/get',        params, // 如果是get请求的话        data: params // 如果是post请求的话      })    }  }</pre> </div> <ul> <li>在main.js里</li> </ul> <div class="ay1code"> <pre class="brush:js;">import Vue from 'vue'  import App from './App.vue'  import api from '@/api/index';  Vue.prototype.$api = api;  Vue.config.productionTip = false  new Vue({    render: h =&gt; h(App),  }).$mount('#app')</pre> </div> <ul> <li>页面上得使用</li> </ul> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  import HelloWorld from './components/HelloWorld.vue'  import api from '@/api/index';  export default {    methods: {      async request() {        let data = {}        try {          let res = await this.$api.getInfo(data)          console.log(res)        } catch(err) {          this.$message.error(err.message)        }      }    }  }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_lab2_2_3" rel="nofollow"></a></p> <h3>api统一管理 + 挂载到vue实例上 + 多模块</h3> <ul> <li>优点：可以在任意位置调用接口</li> <li>缺点：如果接口数量足够大，挂载到vue实例上得数据过多，可能会造成性能问题</li> <li>api/modules/account.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">import account from '@/utils/axios'  export default {    getInfo(params) {      return request({        url: '/xxx/xxx/xxx',        method: 'post/get',        params, // 如果是get请求的话        data: params // 如果是post请求的话      })    }  }</pre> </div> <ul> <li>api/index.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">import account from './modules/account'  export default {    account  }</pre> </div> <ul> <li>在main.js里</li> </ul> <div class="ay1code"> <pre class="brush:js;">import Vue from 'vue'  import App from './App.vue'  import api from '@/api/index';  Vue.prototype.$api = api;  Vue.config.productionTip = false  new Vue({    render: h =&gt; h(App),  }).$mount('#app')</pre> </div> <ul> <li>页面上的使用</li> </ul> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  import HelloWorld from './components/HelloWorld.vue'  import api from '@/api/index';  export default {    methods: {      async request() {        let data = {}        try {          let res = await this.$api.account.getInfo(data)          console.log(res)        } catch(err) {          this.$message.error(err.message)        }      }    }  }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_lab2_2_4" rel="nofollow"></a></p> <h3>api统一管理 + vuex + 单模块</h3> <p>思路：api统一管理的方式不变，但是由挂载到vue实例上改成vuex 优点：在不挂载到vue实例的基础上可以在任何页面随意调用任何接口 缺点：为了保证在刷新页面不会报错的情况下就需要在api模块写一个接口配置，同时在store模块也需要写一次，比较繁琐。</p> <ul> <li>在api/index.js的写法不变。</li> <li>main.js中的相关挂载代码删除</li> <li>store/index.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">import Vue from 'vue';  import Vuex from 'vuex';  import api from '@/api/index';  Vue.use(Vuex);  export default new Vuex.Store({    action: {      getInfo(store, params) {        return api.getInfo(params)      }    }  })</pre> </div> <ul> <li>在页面中</li> </ul> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  export default {    methods: {      async request() {        let data = {}        try {          let res = await this.$store.dispatch('getInfo', data)          console.log(res)        } catch(err) {          this.$message.error(err.message)        }      }    }  }  &lt;/script&gt;</pre> </div> <p>当然你也可以使用mapActions</p> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  import { mapActions } from 'vuex';  export default {    methods: {      ...mapActions([ 'getInfo' ])      async request() {        let data = {}        try {          let res = await this.getInfo(data)          console.log(res)        } catch(err) {          this.$message.error(err.message)        }      }    }  }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_lab2_2_5" rel="nofollow"></a></p> <h3>api统一管理 + vuex + 多模块</h3> <p>优点：可以在页面的任何位置进行调用 缺点：新增删除修改同一个接口，需要同时维护两个文件</p> <ul> <li>对于api文件而言，此时各个模式是相互独立的：api/account.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">import request from '@/utils/axios'  export default {    getInfo(params) {      return request({        url: '/xxx/xxx/xxx',        method: 'post/get',        params, // 如果是get请求的话        data: params // 如果是post请求的话      })    }  }</pre> </div> <ul> <li>store/modules/account.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">import api from '@/api/account';  export default {      namespaced: true,      actions: {          getInfo(store, params) {            return api.getInfo(params)          }      }  }</pre> </div> <ul> <li>store/index.js</li> </ul> <div class="ay1code"> <pre class="brush:js;">import Vue from 'vue';  import Vuex from 'vuex';  import account from './modules/account';  Vue.use(Vuex);  export default new Vuex.Store({    modules: {        account    }  })</pre> </div> <ul> <li>在页面中</li> </ul> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  export default {    methods: {      async request() {        let data = {}        try {          let res = await this.$store.dispatch('account/getInfo', data)          console.log(res)        } catch(err) {          this.$message.error(err.message)        }      }    }  }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>总结</h2> <p>目前就这些方法，各有千秋。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-78527.htm">北京野生动物园鹦鹉馆（北京野生动物园鹦鹉馆电话）</a></p>
+                                        <p>下一个：<a href="/news/article-79211.htm">动物疫苗厂家查询官网 动物疫苗厂家查询官网电话</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-61128.htm" title="宠物领养数据库设计论文（宠物领养网站的设计与实现）">宠物领养数据库设计论文（宠物领养网站的设计与实现）</a></li>
+                        <li class="py-2"><a href="/news/article-56569.htm" title="动物医院实践心得体会总结范文图片（动物医院社会实践总结）">动物医院实践心得体会总结范文图片（动物医院社会实践总结）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-21-free-v2ray.htm" title="VPN台湾 | 3月21日20.8M/S|免费VPN/V2ray/Shadowrocket/Clash/SSR免费节点订阅分享">VPN台湾 | 3月21日20.8M/S|免费VPN/V2ray/Shadowrocket/Clash/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-67859.htm" title="动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）">动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-73775.htm" title="辽宁沈阳猫咪批发市场地址（沈阳最大猫市）">辽宁沈阳猫咪批发市场地址（沈阳最大猫市）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-26-node-share-links.htm" title="VPN台湾 | 2月26日19.6M/S|免费VPN/Shadowrocket/V2ray/Clash/SSR免费节点订阅分享">VPN台湾 | 2月26日19.6M/S|免费VPN/Shadowrocket/V2ray/Clash/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-56123.htm" title="动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）">动物疫苗种类及研究进展情况怎么写（动物疫苗的发展现状）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-25-free-high-speed-nodes.htm" title="VPN台湾 | 2月25日22.3M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享">VPN台湾 | 2月25日22.3M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-59974.htm" title="宠物领养网免费平台有哪些公司的地址的简单介绍">宠物领养网免费平台有哪些公司的地址的简单介绍</a></li>
+                        <li class="py-2"><a href="/news/article-65980.htm" title="nohup: ignoring input and redirecting stderr to stdout报错">nohup: ignoring input and redirecting stderr to stdout报错</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
