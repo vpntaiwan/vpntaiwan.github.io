@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-83407.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>详解Alibaba Java诊断工具Arthas查看Dubbo动态代理类_java</title>
+        <meta name="description" content="阅读Dubbo源码过程中，会发现，Dubbo消费端在做远程调用时，默认通过 Javassist 框架为服务接口生成动态代理类，调用javassist框架下的JavassistProxyFactory类" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-83407.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="详解Alibaba Java诊断工具Arthas查看Dubbo动态代理类_java" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/0b1f74718f22ff648c6748b464438424.webp" />
+        <meta property="og:release_date" content="2025-03-28T09:56:16" />
+    <meta property="og:updated_time" content="2025-03-28T09:56:16" />
+        <meta property="og:description" content="阅读Dubbo源码过程中，会发现，Dubbo消费端在做远程调用时，默认通过 Javassist 框架为服务接口生成动态代理类，调用javassist框架下的JavassistProxyFactory类" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="详解Alibaba Java诊断工具Arthas查看Dubbo动态代理类_java">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>详解Alibaba Java诊断工具Arthas查看Dubbo动态代理类_java</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<p>阅读Dubbo源码过程中，会发现，Dubbo消费端在做远程调用时，默认通过 Javassist 框架为服务接口生成动态代理类，调用javassist框架下的JavassistProxyFactory类的getProxy(Invoker invoker, Class&lt;?&gt;[] interfaces)方法，动态生成一个存放在JVM中的动态代理类。</p> <div class="ay1code"> <pre class="brush:java;">public &lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker, Class&lt;?&gt;[] interfaces) {      return (T) Proxy.getProxy(interfaces).newInstance(new InvokerInvocationHandler(invoker));  }</pre> </div> <p>那么，问题来了，如果我们想要一睹该动态生成的代理类内部结构是怎样的，如何才能便捷做到的？</p> <p>这就是我想介绍的一款工具，它可以帮助我们查看JDK或者javassist生成的动态代理类，当然，它的功能远不止此，还可以在生产环境进行诊断。</p> <p>Arthas 是Alibaba开源的Java诊断工具，官方在线文档地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://arthas.aliyun.com/doc/"   target="_blank" rel="nofollow">https://arthas.aliyun.com/doc/</a></p> <p>根据官网上的介绍，它还可以解决以下问题————</p> <p>当你遇到以下类似问题而束手无策时，Arthas可以帮助你解决：</p> <p>这个类从哪个 jar 包加载的？为什么会报各种类相关的 Exception？</p> <p>我改的代码为什么没有执行到？难道是我没 commit？分支搞错了？</p> <p>遇到问题无法在线上 debug，难道只能通过加日志再重新发布吗？</p> <p>线上遇到某个用户的数据处理有问题，但线上同样无法 debug，线下无法重现！</p> <p>是否有一个全局视角来查看系统的运行状况？</p> <p>有什么办法可以监控到JVM的实时运行状态？</p> <p>怎么快速定位应用的热点，生成火焰图？</p> <p>怎样直接从JVM内查找某个类的实例？</p> <p>这些方案本文暂不展开，这里只展开通过该工具查看Dubbo生成的动态代理类。</p> <p>我是直接在使用dubbo-parent源码中的例子，分别启动了提供者与消费者。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220427/e02fe5cef167d19a7b0cd16bf532838b.jpg"></p> <p>首先，启动提供者方法——</p> <div class="ay1code"> <pre class="brush:java;">public class Application {      public static void main(String[] args) throws Exception {              startWithBootstrap();         }      private static boolean isClassic(String[] args) {          return args.length &gt; 0 &amp;&amp; "classic".equalsIgnoreCase(args[0]);      }      private static void startWithBootstrap() {          ServiceConfig&lt;DemoServiceImpl&gt; service = new ServiceConfig&lt;&gt;();          service.setInterface(DemoService.class);          service.setRef(new DemoServiceImpl());          DubboBootstrap bootstrap = DubboBootstrap.getInstance();          RegistryConfig registryConfig = new RegistryConfig("zookeeper://127.0.0.1:2181");          registryConfig.setTimeout(20000);          ProtocolConfig protocolConfig = new ProtocolConfig();          protocolConfig.setName("dubbo");          protocolConfig.setHost("192.168.100.1");          protocolConfig.setPort(20877);          bootstrap.application(new ApplicationConfig("dubbo-demo-api-provider"))                  .registry(registryConfig)                  .service(service)                  .protocol(protocolConfig)                  .start()                  .await();      }  }  </pre> </div> <p>注意，需要配置RegistryConfig自己的zookeeper， protocolConfig.setHost("xxx.xxx.xxx.xxx")设置成你本地内网的ip即可；</p> <p>DemoServiceImpl类详情——</p> <div class="ay1code"> <pre class="brush:java;">public class DemoServiceImpl implements DemoService {      private static final Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);        @Override      public String sayHello(String name) {          logger.info("Hello " + name + ", request from consumer: " + RpcContext.getContext().getRemoteAddress());          return "Hello " + name + ", response from provider: " + RpcContext.getContext().getLocalAddress();      }        public CompletableFuture&lt;String&gt; sayHelloAsync(String name) {          return null;    }  </pre> </div> <p>接着，启动消费者，这里可以设置一个休眠时间，这样就可以一直维持消费者运行在内存当中——</p> <div class="ay1code"> <pre class="brush:java;">public class Application {      public static void main(String[] args) {              runWithRefer();      }      private static void runWithRefer() {          RegistryConfig registryConfig = new RegistryConfig("zookeeper://127.0.0.1:2181");          registryConfig.setTimeout(30000);          ProtocolConfig protocolConfig = new ProtocolConfig();          protocolConfig.setName("dubbo");          protocolConfig.setHost("192.168.200.1");          protocolConfig.setPort(20899);          ReferenceConfig&lt;DemoService&gt; reference = new ReferenceConfig&lt;&gt;();          reference.setApplication(new ApplicationConfig("dubbo-demo-api-consumer"));          reference.setRegistry(registryConfig);          reference.setInterface(DemoService.class);          DemoService service = reference.get();          String message = service.sayHello("dubbo");          System.out.println("打印了5555555"+message);          try {              Thread.sleep(100000000);          } catch (InterruptedException e) {              e.printStackTrace();          }  }  </pre> </div> <p>当Dubbo的服务提供者与消费者都正常运行时，说明此时JVM虚拟机内存里已经存在动态生成的代理类，这时，我们就可以开始通过arthas-boot.jar工具进行查看了。</p> <p>首先，将arthas-boot.jar工具下载到你本地，我的是Windows，随便放到一个目录当中，例如——</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220427/9f27f234f65168cc3b60e683c23d9252.jpg"></p> <p>接着，直接在运行着Dubbo消费端进程的IDEA上打开Terminal——</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220427/717516dd54851ea6b75c89eebd2d19e4.jpg"></p> <p>然后，输入 java -jar C:\Users\92493\Downloads\12229238_g\arthas-boot.jar ，arthas正常运行成功话，将列出当前JVM上运行的进程——</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220427/2e9f791797287221572fbdeabe598e45.jpg"></p> <p>可以看到我们刚刚启动的provider进程与consumer进程，这时，只需要输入对应进程前面的编号【5】，就可以将Arthas 关联到启动类为 org.apache.dubbo.demo.consumer.Application的 Java 进程上了——</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220427/f91ea77732546e16025b8a6b6bfb979b.jpg"></p> <p>到这一步，我们就可以通过指令 sc *.proxy *模糊查询带有proxy标志的类名了，动态代理生成的类一般都是以Proxy标志——</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220427/4dc078c2fb3705b5cdf0a1a75c4622a4.jpg"></p> <p>其中，这里的org.apache.dubbo.common.bytecode.proxy0就是消费者生成的动态代理类，我们可以直接反编译去查看它内部结构——</p> <p>[arthas@57676]$ jad org.apache.dubbo.common.bytecode.proxy0</p> <p>控制台就会打印出该动态代理类的内部结构——</p> <div class="ay1code"> <pre class="brush:java;">/*   * Decompiled with CFR.   *    * Could not load the following classes:   * com.alibaba.dubbo.rpc.service.EchoService   * org.apache.dubbo.common.bytecode.ClassGenerator$DC   * org.apache.dubbo.demo.DemoService   * org.apache.dubbo.rpc.service.Destroyable     */     package org.apache.dubbo.common.bytecode;  import com.alibaba.dubbo.rpc.service.EchoService;  import java.lang.reflect.InvocationHandler;  import java.lang.reflect.Method;  import java.util.concurrent.CompletableFuture;  import org.apache.dubbo.common.bytecode.ClassGenerator;  import org.apache.dubbo.demo.DemoService;  import org.apache.dubbo.rpc.service.Destroyable;  public class proxy0 implements ClassGenerator.DC,Destroyable,EchoService,DemoService {  public static Method[] methods;  private InvocationHandler handler;  public String sayHello(String string) {      Object[] objectArray = new Object[]{string};      Object object = this.handler.invoke(this, methods[0], objectArray);      return (String)object;  }  public CompletableFuture sayHelloAsync(String string) {      Object[] objectArray = new Object[]{string};      Object object = this.handler.invoke(this, methods[1], objectArray);      return (CompletableFuture)object;  }  public Object $echo(Object object) {      Object[] objectArray = new Object[]{object};      Object object2 = this.handler.invoke(this, methods[2], objectArray);      return object2;  }  public void $destroy() {      Object[] objectArray = new Object[]{};      Object object = this.handler.invoke(this, methods[3], objectArray);  }  public proxy0() {  }  public proxy0(InvocationHandler invocationHandler) {      this.handler = invocationHandler;    }  }  </pre> </div> <p>在Dubbo案例当中，当我们执行 String message = service.sayHello("dubbo")去调用远程接口时，其实是调用了动态代理生成的方法——</p> <div class="ay1code"> <pre class="brush:java;">public String sayHello(String string) {      Object[] objectArray = new Object[]{string};      Object object = this.handler.invoke(this, methods[0], objectArray);      return (String)object;  }  </pre> </div> <p>举一反三，这个Arthas工具类可以在线上生产环境查看一些我们新部署的代码，看是否是新改动的。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-82695.htm">重庆宠物领养网站官网入口（重庆宠物领养网站官网入口网址）</a></p>
+                                        <p>下一个：<a href="/news/article-83408.htm">合肥宠物领养救助站在哪里啊（合肥宠物领养合肥宠物赠送）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-81984.htm" title="宠物店一个月能卖多少狗粮啊 宠物店一个月能卖多少狗粮啊视频">宠物店一个月能卖多少狗粮啊 宠物店一个月能卖多少狗粮啊视频</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-2-free-v2ray.htm" title="VPN台湾 | 3月2日22M/S|免费VPN/Shadowrocket/V2ray/SSR/Clash免费节点订阅分享">VPN台湾 | 3月2日22M/S|免费VPN/Shadowrocket/V2ray/SSR/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-71782.htm" title="React中事件的写法总结">React中事件的写法总结</a></li>
+                        <li class="py-2"><a href="/news/article-67239.htm" title="《神话》10年三女主再聚首，张萌在线呼叫胡歌，还拉上了白冰金莎">《神话》10年三女主再聚首，张萌在线呼叫胡歌，还拉上了白冰金莎</a></li>
+                        <li class="py-2"><a href="/news/article-58881.htm" title="JavaScript 对象的四种方式比较详解_javascript技巧">JavaScript 对象的四种方式比较详解_javascript技巧</a></li>
+                        <li class="py-2"><a href="/news/article-67859.htm" title="动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）">动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-70476.htm" title="webpack 执行npm run 时，因为版本依赖报的那些错">webpack 执行npm run 时，因为版本依赖报的那些错</a></li>
+                        <li class="py-2"><a href="/news/article-62327.htm" title="彻底搞定kubernetes远程访问">彻底搞定kubernetes远程访问</a></li>
+                        <li class="py-2"><a href="/news/article-75127.htm" title="狂犬疫苗多少钱一针?（狂犬疫苗多少钱一针?打几针）">狂犬疫苗多少钱一针?（狂犬疫苗多少钱一针?打几针）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-v2ray-subscribe.htm" title="VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 3月4日20.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

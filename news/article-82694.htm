@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-82694.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>python笔记 函数，参数，形参和实参，参数的传递</title>
+        <meta name="description" content="8.1 函数概念   函数也是一个对象   函数用来保存一些可执行的代码，并且可以在需要时，对这些语句进行多次调用   语法  def 函数名([形参1,形参2,形参3…]): 代码块  注意：函数名" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-82694.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="python笔记 函数，参数，形参和实参，参数的传递" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/b194515cf519b0ecf78233bb89bd2098.webp" />
+        <meta property="og:release_date" content="2025-03-27T08:15:53" />
+    <meta property="og:updated_time" content="2025-03-27T08:15:53" />
+        <meta property="og:description" content="8.1 函数概念   函数也是一个对象   函数用来保存一些可执行的代码，并且可以在需要时，对这些语句进行多次调用   语法  def 函数名([形参1,形参2,形参3…]): 代码块  注意：函数名" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="python笔记 函数，参数，形参和实参，参数的传递">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>python笔记 函数，参数，形参和实参，参数的传递</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> </h1> <h2><a id="81__1" rel="nofollow"></a>8.1 函数概念</h2> <ol> <li> <p>函数也是一个对象</p> </li> <li> <p>函数用来保存一些可执行的代码，并且可以在需要时，对这些语句进行多次调用</p> </li> <li> <p>语法</p> <blockquote> <p>def 函数名([形参1,形参2,形参3…]):<br /> 代码块</p> </blockquote> <p>注意：函数名必须符合标识符的规范(可以包含字母、数字、下划线但是不能以数字开头)</p> </li> <li> <p>函数对象和调用函数：拿print函数举例子，print是函数对象 print()是调用函数</p> </li> </ol> <h2><a id="82__10" rel="nofollow"></a>8.2 函数的参数</h2> <p>简单的来说，函数是一个处理的过程形如fun()。但是如果要用函数将输入的数据进行处理，则要将数据导入进函数，于是就可以将数据在fun后的()输入，从而以参数的形式进入到函数中，参数的形式可以是字符串、数字、列表、字典、甚至是已经定义好的函数。</p> <h3><a id="1__12" rel="nofollow"></a>1. 形参和实参</h3> <ul> <li>形参(形式参数) 定义形参就相当于在函数内部声明了变量，但是并不是赋值</li> <li>实参(实际参数)指定了形参，那么在调用函数时必须传递实参，实参将会赋值给对应的形参，简单来说有几个形参就要有几个实参</li> <li>形参就是形式上的参数，只是定义好了的，调用的时候需要进行参数传递，用实参进行传递</li> <li>任意类型的数据（包括列表、字典、字符串、元组等）都是可以通过函数传递的</li> </ul> <h3><a id="2__17" rel="nofollow"></a>2. 函数的传递方式</h3> <ul> <li>默认参数： 定义形参时,可以为形参指定默认值。指定了默认值以后，如果用户传递了参数则默认值不会生效。如果用户没有传递，则默认值就会生效</li> <li>位置参数：位置参数就是将对应位置的实参赋值给对应位置的形参</li> <li>关键字参数 : 关键字参数可以不按照形参定义的顺序去传递，而根据参数名进行传递</li> <li>混合使用位置参数和关键字参数的时候必须将位置参数写到关键字参数前面去<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220722/b9d5b7a8bf9f49413b68b7d291468c72.jpg" alt="python笔记 函数，参数，形参和实参，参数的传递"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220722/cc1816588869351e75ce7a230482de6d.jpg" alt="python笔记 函数，参数，形参和实参，参数的传递"></li> </ul> <h3><a id="3__25" rel="nofollow"></a>3. 不定长参数</h3> <ul> <li>带 * 的形参：<br /> 1.定义函数时，可以在形参前面加一个 * ,这样这个形参可以获取到所有的实参，它会将所有的实参保存到一个元组中。* 形参只能接受位置参数，不能接受关键字参数<br /> 2.带 * 号的形参只能有一个，可以和其他参数配合使用<br /> 3.习惯上用*args来表示</li> <li>带 ** 的形参：<br /> 1.** 形参可以接收其他的关键字参数,它会将这些参数统一保存到字典当中。字典的key就是参数的名字,字典的value就是参数的值<br /> 2.** 形参只有一个，并且必须写在所有参数的后面<br /> 3.习惯上用**kwargs来表示</li> <li>*和**都只能存在一个，但是两种可以同时使用。</li> <li>参数arg、*args、**kwargs三个参数的位置必须是一定的。必须是(arg,*args,**kwargs)这个顺序，否则程序会报错。</li> </ul> <h3><a id="4__36" rel="nofollow"></a>4. 参数的解包</h3> <p>• 传递实参时，也可以在序列类型的参数前添加星号，这样它会自动的将序列中元素依次作为参数传递<br /> • 要求序列中的元素的个数必须和形参的个数一致</p> <h2><a id="83__39" rel="nofollow"></a>8.3 作业</h2> <ol> <li>打印名片程序:输入姓名，电话号码，性别，最后打印出来名片<br /> • 控制姓名长度为6-20<br /> • 电话号码长度11<br /> • 性别只能允许输入男或女<br /> • 每一样信息不允许为空</li> </ol> <pre><code class="prism language-python"><span class="token keyword">def</span><span class="token function">card</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">while</span><span class="token boolean">True</span><span class="token punctuation">:</span>                                           name<span class="token operator">=</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">'请输入你的名字：'</span><span class="token punctuation">)</span><span class="token keyword">if</span><span class="token number">6</span><span class="token operator">&lt;</span><span class="token builtin">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">20</span><span class="token punctuation">:</span><span class="token keyword">break</span><span class="token keyword">else</span><span class="token punctuation">:</span><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'名字太长或太短，重新输入'</span><span class="token punctuation">)</span><span class="token keyword">while</span><span class="token boolean">True</span><span class="token punctuation">:</span>                                           telephone<span class="token operator">=</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">'请输入电话号码：'</span><span class="token punctuation">)</span><span class="token keyword">if</span><span class="token builtin">len</span><span class="token punctuation">(</span>telephone<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">11</span><span class="token punctuation">:</span><span class="token keyword">if</span> telephone<span class="token punctuation">.</span>isdigit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment"># isdigit判断字</span><span class="token keyword">break</span><span class="token keyword">else</span><span class="token punctuation">:</span><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'手机号码由数字组成'</span><span class="token punctuation">)</span><span class="token keyword">continue</span><span class="token keyword">else</span><span class="token punctuation">:</span><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'请输入正确的手机号码'</span><span class="token punctuation">)</span><span class="token keyword">continue</span><span class="token keyword">while</span><span class="token boolean">True</span><span class="token punctuation">:</span>                                           gender<span class="token operator">=</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">'请输入你的性别'</span><span class="token punctuation">)</span><span class="token keyword">if</span> gender<span class="token operator">==</span><span class="token string">'男'</span><span class="token operator">or</span> gender<span class="token operator">==</span><span class="token string">'女'</span><span class="token punctuation">:</span><span class="token keyword">break</span><span class="token keyword">else</span><span class="token punctuation">:</span><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'难道你从泰国回来啦？'</span><span class="token punctuation">)</span><span class="token keyword">continue</span><span class="token keyword">return</span> name<span class="token punctuation">,</span> telephone<span class="token punctuation">,</span> gender                                                                                                                    r<span class="token operator">=</span> card<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span></code></pre> <ol start="2"> <li>使用函数求前20个斐波那契数列斐波那契数列：1,1,2,3,5,8,13,21…即: 起始两项均为1，此后的项分别为前两项之和</li> </ol> <pre><code class="prism language-python"><span class="token keyword">def</span><span class="token function">fun</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>                                 a<span class="token operator">=</span> b<span class="token operator">=</span><span class="token number">1</span>                               list1<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token keyword">for</span> i<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">if</span> i<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">:</span>                                  list1<span class="token punctuation">.</span>append<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token keyword">if</span> i<span class="token operator">&gt;</span><span class="token number">0</span><span class="token punctuation">:</span>                                   a<span class="token punctuation">,</span> b<span class="token operator">=</span> b<span class="token punctuation">,</span> b<span class="token operator">+</span> a                         list1<span class="token punctuation">.</span>append<span class="token punctuation">(</span>a<span class="token punctuation">)</span></code></pre> <ol start="3"> <li>编写一段代码，定义一个函数求1-100之间所有整数的和，并调用该函数打印出结果</li> </ol> <pre><code class="prism language-python"><span class="token keyword">def</span><span class="token function">m</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span> 	m<span class="token operator">=</span><span class="token number">0</span><span class="token keyword">for</span> i<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 		m<span class="token operator">=</span> m<span class="token operator">+</span> i<span class="token keyword">print</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span> m<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-81984.htm">宠物店一个月能卖多少狗粮啊 宠物店一个月能卖多少狗粮啊视频</a></p>
+                                        <p>下一个：<a href="/news/article-82695.htm">重庆宠物领养网站官网入口（重庆宠物领养网站官网入口网址）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-26-node-share-links.htm" title="VPN台湾 | 2月26日19.6M/S|免费VPN/Shadowrocket/V2ray/Clash/SSR免费节点订阅分享">VPN台湾 | 2月26日19.6M/S|免费VPN/Shadowrocket/V2ray/Clash/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-64745.htm" title="宠物食品加工厂手续怎么办理流程（宠物食品厂需要办什么手续）">宠物食品加工厂手续怎么办理流程（宠物食品厂需要办什么手续）</a></li>
+                        <li class="py-2"><a href="/news/article-70476.htm" title="webpack 执行npm run 时，因为版本依赖报的那些错">webpack 执行npm run 时，因为版本依赖报的那些错</a></li>
+                        <li class="py-2"><a href="/news/article-79906.htm" title="python函数参数的默认参数、元组参数和字典参数例解">python函数参数的默认参数、元组参数和字典参数例解</a></li>
+                        <li class="py-2"><a href="/news/article-83408.htm" title="合肥宠物领养救助站在哪里啊（合肥宠物领养合肥宠物赠送）">合肥宠物领养救助站在哪里啊（合肥宠物领养合肥宠物赠送）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-free-subscribe-node.htm" title="VPN台湾 | 3月17日23M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享">VPN台湾 | 3月17日23M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-59412.htm" title="我所在的城市有一家动物医院的英语怎么写（在我的城市有一家宠物医院的英语怎么说）">我所在的城市有一家动物医院的英语怎么写（在我的城市有一家宠物医院的英语怎么说）</a></li>
+                        <li class="py-2"><a href="/news/article-74441.htm" title="@Scheduled注解用法">@Scheduled注解用法</a></li>
+                        <li class="py-2"><a href="/news/article-64133.htm" title="SDS-redis动态字符串">SDS-redis动态字符串</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-18-clash-v2ray-ss-ssr.htm" title="VPN台湾 | 3月18日20.3M/S|免费VPN/SSR/Shadowrocket/V2ray/Clash免费节点订阅分享">VPN台湾 | 3月18日20.3M/S|免费VPN/SSR/Shadowrocket/V2ray/Clash免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
