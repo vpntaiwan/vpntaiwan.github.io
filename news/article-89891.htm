@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-89891.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Go 语言接口及使用接口实现链表插入</title>
+        <meta name="description" content="@  目录  1. 接口定义  1.1 空接口 1.2 实现单一接口 1.3 接口多方法实现   2. 多态  2.1 为不同数据类型的实体提供统一的接口 2.2 多接口的实现   3. 系统接口调用" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-89891.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="Go 语言接口及使用接口实现链表插入" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/0c40c46582ea848557dead5c9dc49f7f.webp" />
+        <meta property="og:release_date" content="2025-04-06T10:09:37" />
+    <meta property="og:updated_time" content="2025-04-06T10:09:37" />
+        <meta property="og:description" content="@  目录  1. 接口定义  1.1 空接口 1.2 实现单一接口 1.3 接口多方法实现   2. 多态  2.1 为不同数据类型的实体提供统一的接口 2.2 多接口的实现   3. 系统接口调用" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Go 语言接口及使用接口实现链表插入">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>Go 语言接口及使用接口实现链表插入</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<p>@</p> <div class="toc"> <div class="toc-container-header">目录</div> <ul> <li><a href="#1-%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89" rel="nofollow">1. 接口定义</a> <ul> <li><a href="#11-%E7%A9%BA%E6%8E%A5%E5%8F%A3" rel="nofollow">1.1 空接口</a></li> <li><a href="#12-%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%B8%80%E6%8E%A5%E5%8F%A3" rel="nofollow">1.2 实现单一接口</a></li> <li><a href="#13-%E6%8E%A5%E5%8F%A3%E5%A4%9A%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0" rel="nofollow">1.3 接口多方法实现</a></li> </ul> </li> <li><a href="#2-%E5%A4%9A%E6%80%81" rel="nofollow">2. 多态</a> <ul> <li><a href="#21-%E4%B8%BA%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9E%E4%BD%93%E6%8F%90%E4%BE%9B%E7%BB%9F%E4%B8%80%E7%9A%84%E6%8E%A5%E5%8F%A3" rel="nofollow">2.1 为不同数据类型的实体提供统一的接口</a></li> <li><a href="#22-%E5%A4%9A%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0" rel="nofollow">2.2 多接口的实现</a></li> </ul> </li> <li><a href="#3-%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8" rel="nofollow">3. 系统接口调用</a></li> <li><a href="#4-%E6%8E%A5%E5%8F%A3%E5%B5%8C%E5%A5%97" rel="nofollow">4. 接口嵌套</a></li> <li><a href="#5-%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80" rel="nofollow">5. 类型断言</a> <ul> <li><a href="#51-%E6%96%AD%E8%A8%80%E5%88%A4%E6%96%AD" rel="nofollow">5.1 断言判断</a></li> <li><a href="#52-%E5%A4%9A%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD" rel="nofollow">5.2 多类型判断</a></li> </ul> </li> <li><a href="#6-%E4%BD%BF%E7%94%A8%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5" rel="nofollow">6. 使用接口实现链表插入</a></li> </ul> </div> <hr/> </h1> <ul> <li> <p>Interface 类型可以定义一组方法，不需要实现，并且不能包含任何的变量，称之为接口</p> </li> <li> <p>接口不需要显示的实现，只需要一个变量，含有接口类型中的所有方法，那么这个变量就实现了这个接口，如果一个变量含有多个interface 类型的方法，那么这个变量就实现了多个接口</p> </li> <li> <p>接口又称为动态数据类型，在进行接口使用的的时候，会将接口对位置的动态类型改为所指向的类型<br /> 会将动态值改成所指向类型的结构体</p> </li> <li> <p>每个接口由数个方法组成，接口的定义格式如下：<br /><code>其中参数列表和返回值列表中的参数变量名可以省略</code></p> </li> </ul> <pre><code class="language-go">type 接口类型名 interface{     方法名1( 参数列表1 ) 返回值列表1     方法名2( 参数列表2 ) 返回值列表2     … }</code></pre> <ul> <li>自定义接口步骤<br /> ① 定义接口<br /> ② 定义结构体<br /> ③ 接口实现（绑定结构体）<br /> ④ 定义接口变量，初始化结构体，调用接口实现功能</li> </ul> <h2 id="11-空接口">1.1 空接口</h2> <p><code>空接口就相当于一个空指针</code></p> <pre><code class="language-go">package main  import "fmt"  //定义空接口 type Test interface{}  func main() { 	//声明接口方法1 	var t Test 	fmt.Printf("t的类型: %T, t的值: %v\n", t, t) 	//声明接口方法2 	var a interface{} 	var b int 	a = b 	fmt.Printf("a的类型: %T, a的值: %v\n", a, a) }  //输出结果如下 t的类型: &lt;nil&gt;, t的值: &lt;nil&gt; a的类型: int, a的值: 0</code></pre> <h2 id="12-实现单一接口">1.2 实现单一接口</h2> <p><mark>结构体使用接口打印信息</mark></p> <pre><code class="language-go">package main  import "fmt"  type Student struct { 	Name  string 	Age   int 	Score float32 }  //接口定义:接口是功能的抽象,不需要实现 type Test interface { 	Print() }  //指针类型实现接口 func (p *Student) Print() { 	fmt.Printf("name:[%s]\n", p.Name) 	fmt.Printf("age:[%d]\n", p.Age) 	fmt.Printf("score:[%f]\n", p.Score) }  //值类型实现接口 /* func (p Student) Print() { 	fmt.Printf("name:[%s]\n", p.Name) 	fmt.Printf("age:[%d]\n", p.Age) 	fmt.Printf("score:[%f]\n", p.Score) } */  func main() { 	//声明接口变量 	var t Test 	//结构体初始化 	var stu Student = Student{ 		Name:  "zhangsan", 		Age:   18, 		Score: 90, 	} 	//把结构体赋值给接口 	t = &amp;stu 	//接口功能 	t.Print() }   //输出结果如下 name:[zhangsan] name:[18] name:[90.000000]</code></pre> <h2 id="13-接口多方法实现">1.3 接口多方法实现</h2> <pre><code class="language-go">package main  import "fmt"  type Student struct { 	Name  string 	Age   int 	Score float32 }  //接口定义:接口是功能的抽象,不需要实现 type Test interface { 	Print() 	Sleep() }  //接口的实现 func (p *Student) Print() { 	fmt.Printf("name:[%s]\n", p.Name) 	fmt.Printf("age:[%d]\n", p.Age) 	fmt.Printf("score:[%f]\n", p.Score)  }  //接口中包含多个方法，如果要使用此接口就要实现接口中包含的所有方法 func (p *Student) Sleep() { 	fmt.Println("正在睡眠~") }  func main() { 	//声明接口变量 	var t Test 	//结构体初始化 	var stu Student = Student{ 		Name:  "zhangsan", 		Age:   18, 		Score: 90, 	} 	//把结构体赋值给接口 	t = &amp;stu 	//接口功能 	t.Print() 	t.Sleep() }   //输出结果如下 name:[zhangsan] name:[18] name:[90.000000] 正在睡眠~</code></pre> <ul> <li>示例，在电脑上定义一个USB接口，实现鼠标、U盘、风扇的功能</li> </ul> <pre><code class="language-go">package main  import "fmt"  //定义电脑 type Computer struct { 	Brand string	//品牌 	Price float32	//价格 }  //定义USB接口 type USB interface { 	mouse() 	store() 	fan() }  //接口功能实现 func (c Computer) mouse() { 	fmt.Println("鼠标") }  func (c Computer) store() { 	fmt.Println("U盘") }  func (c Computer) fan() { 	fmt.Println("风扇") }  func main() { 	//初始化结构体 	var com Computer 	//初始化接口 	var usb USB 	com.Brand = "thinkpad" 	com.Price = 5000 	//接口调用 	usb = com 	usb.mouse() 	usb.fan() 	usb.store() }   //输出结果如下 鼠标 风扇 U盘</code></pre> </h1> <ul> <li>对于同一个接口，赋予给不同的结构体，使用相同的方法而产生出不同的操作，称之为多态。</li> </ul> <h2 id="21-为不同数据类型的实体提供统一的接口">2.1 为不同数据类型的实体提供统一的接口</h2> <pre><code class="language-go">package main  import "fmt"  //父结构体 type Persion struct { 	Name string 	Age  int }  //学生子结构体 type Student struct { 	Persion 	Score float32 }  //教师子结构体 type Teacher struct { 	Persion 	Class int }  //接口定义:接口时功能的抽象,不需要实现 type Test interface { 	Print() 	Sleep() }  //学生结构体的实现 func (p *Student) Print() { 	fmt.Printf("name:[%s]\n", p.Name) 	fmt.Printf("age:[%d]\n", p.Age) 	fmt.Printf("Score:[%f]\n", p.Score) }  //教师结构体的实现 func (p *Teacher) Print() { 	fmt.Printf("name:[%s]\n", p.Name) 	fmt.Printf("age:[%d]\n", p.Age) 	fmt.Printf("Class:[%d]\n", p.Class)  }  //接口中包含多个方法，如果要使用此接口就要实现接口中包含的所有方法 func (p *Student) Sleep() { 	fmt.Println("正在睡眠~") }  func (p *Teacher) Sleep() { 	fmt.Println("正在休息~") }  func main() { 	//声明接口变量 	var t Test 	//学生初始化 	var stu Student 	stu.Name = "zhangsan" 	stu.Age = 18 	stu.Score = 90  	//教师初始化 	var tea Teacher 	tea.Name = "lisi" 	tea.Age = 25 	tea.Class = 3  	//学生接口功能调用实现 	t = &amp;stu 	t.Print() 	t.Sleep() 	fmt.Println("----------------------------") 	//教师接口功能调用实现 	t = &amp;tea 	t.Print() 	t.Sleep() }   //输出结果如下 name:[zhangsan] age:[18] Score:[90.000000] 正在睡眠~ ---------------------------- name:[lisi] age:[25] Class:[3] 正在休息~</code></pre> <h2 id="22-多接口的实现">2.2 多接口的实现</h2> <pre><code class="language-go">package main  import "fmt"  //接口1 type Test1 interface { 	Print() }  //接口2 type Test2 interface { 	Sleep() }  //结构体 type Student struct { 	Name  string 	Age   int 	Score float32 }  //接口1实现 func (s Student) Print() { 	fmt.Printf("name:[%s]\n", s.Name) }  //接口2实现 func (s Student) Sleep() { 	fmt.Println("正在睡眠") }  func main() { 	//接口1变量 	var t1 Test1 	//接口2变量 	var t2 Test2 	//初始化结构体 	var stu Student = Student{ 		Name:  "zhangsan", 		Age:   18, 		Score: 90, 	} 	//调用接口实现功能 	t1 = stu 	t1.Print()  	t2 = stu 	t2.Sleep() }   //输出结果如下 name:[zhangsan] 正在睡眠</code></pre> </h1> <ul> <li>示例<br /><mark>使用接口进行排序</mark></li> </ul> <pre><code class="language-go">package main  import (     "fmt"     "math/rand"     "sort" )  //结构体 type Student struct {     Name  string     Age   int     Score float32 }  //切片 type StudentArray []Student  //go语言提供了sort 接口。使用接口里的方法即可 //实现sort接口 func (sa StudentArray) Len() int {     return len(sa) } //获取切片长度 func (sa StudentArray) Less(i, j int) bool {     return sa[i].Name &gt; sa[j].Name } //两数比大小 func (sa StudentArray) Swap(i, j int) {     sa[i], sa[j] = sa[j], sa[i] } //两数交换  func main() {     //Student 切片     var stus StudentArray      //生成10个结构体，放入切片中     for i := 0; i &lt; 10; i++ {         var stu Student = Student{             Name:  fmt.Sprintf("stu%d", rand.Intn(100)),             Age:   rand.Intn(120),             Score: rand.Float32() * 100,         }          //结构体元素存入到切片中         stus = append(stus, stu)     }      //遍历     for _, v := range stus {         fmt.Println(v)     }      fmt.Println("--------------------------")     //排序     sort.Sort(stus)     //遍历     for _, v := range stus {         fmt.Println(v)     } }</code></pre> </h1> <ul> <li>示例：<br /><mark>文件读写测试</mark></li> </ul> <pre><code class="language-go">package main  import "fmt"  //读取的接口 type Reader interface { 	Read() }  //写入的接口 type Writer interface { 	Writer() }  //接口的嵌套 type ReadWriter interface { 	Reader 	Writer }  //文件结构体 type File struct{}  //实现Reader接口 func (f *File) Read() { 	fmt.Println("文件读取") }  //实现Writer接口 func (f *File) Writer() { 	fmt.Println("文件写入") }  //定义读写操作函数 func Test(rw ReadWriter) {  //rw为接口变量 	rw.Read()				//使用读写的方法 	rw.Writer() }  func main() { 	var f File				//定义结构体，初始化文件 	Test(&amp;f) }   //输出结果如下 文件读取 文件写入</code></pre> </h1> <ul> <li>作用：因为接口是一般类型，需要明确具体类型的时候就需要使用类型断言</li> </ul> <p><mark>示例</mark></p> <pre><code class="language-go">package main  import "fmt"  func main() { 	//定义空接口 	var a interface{} 	var b int 	a = b //a为int类型 	//断言赋值 	fmt.Printf("a= %v, 类型: %T\n", a, a) 	c := a.(int) 	fmt.Printf("c= %v, 类型: %T\n", c, c) }   //输出结果如下 a= 0, 类型: int c= 0, 类型: int</code></pre> <h2 id="51-断言判断">5.1 断言判断</h2> <pre><code class="language-go">package main  import "fmt"  func main() { 	//定义空接口 	var a interface{} 	var b string 	a = b //a为int类型 	//断言赋值 	fmt.Printf("a= %v, 类型: %T\n", a, a) 	c, err := a.(int) 	if err { 		fmt.Printf("c= %v, 类型: %T\n", c, c) 	} else { 		fmt.Println("不是int类型") 	} }  //输出结果如下 a= , 类型: string 不是int类型</code></pre> <pre><code class="language-go">package main  import "fmt"  func Test(t interface{}) { 	//转换类型判断 	v, err := t.(int) 	if !err { 		fmt.Println("type is not int") 		return 	} 	v++ 	fmt.Println(v) }  func main() { 	a := "张三" 	Test(a) }  //输出结果如下 type is not int</code></pre> <h2 id="52-多类型判断">5.2 多类型判断</h2> <pre><code class="language-go">package main  import "fmt"  func classifier(items ...interface{}) { 	//遍历复杂集合 	for i, v := range items { 		//变量.(type)职能作用在switch语句中，专门用于判断类型 		switch v.(type) { 		case bool: 			fmt.Printf("第 %d 个数据类型是 bool\n", i) 		case int, int32, int64: 			fmt.Printf("第 %d 个数据类型是 int\n", i) 		case float32, float64: 			fmt.Printf("第 %d 个数据类型是 float\n", i) 		case string: 			fmt.Printf("第 %d 个数据类型是 string\n", i) 		default: 			fmt.Printf("第 %d 个数据类型是其他类型\n", i) 		} 	} }  func main() { 	//传入多种类型参数 	classifier("张三", 3.14, true, 80, nil) }   //输出结果如下 第 0 个数据类型是 string 第 1 个数据类型是 float 第 2 个数据类型是 bool 第 3 个数据类型是 int 第 4 个数据类型是其他类型</code></pre> </h1> <pre><code class="language-go">package main  import "fmt"  //节点结构体 type LinkNode struct {     data interface{}     next *LinkNode }  //链表结构体 type Link struct {     head *LinkNode     tail *LinkNode }  //从头部插入 func (p *Link) InsertHead(data interface{}) {     node := &amp;LinkNode{         data: data,         next: nil,     }     //判断是否为空链表     if p.head == nil &amp;&amp; p.tail == nil {         p.head = node         p.tail = node         return     }     //当前节点的next是原头部节点     node.next = p.head     //更新头部     p.head = node }  //从尾部插入 func (p *Link) InsertTail(data interface{}) {     node := &amp;LinkNode{         data: data,         next: nil,     }      //判断是否为空链表     if p.head == nil &amp;&amp; p.tail == nil {         p.head = node         p.tail = node         return     }      //原尾部节点的next是当前节点     p.tail.next = node     //更新尾部     p.tail = node }  //遍历方法 func (p *Link) Req() {     lp := p.head     for lp != nil {         fmt.Println(lp)         lp = lp.next     } }  func main() {     //定义链表     var intLink Link     for i := 0; i &lt; 10; i++ {         //intLink.InsertHead(i)         intLink.InsertTail(i)     }     intLink.Req() }   //输出结果如下 &amp;{0 0xc000096078} &amp;{1 0xc000096090} &amp;{2 0xc0000960a8} &amp;{3 0xc0000960c0} &amp;{4 0xc0000960d8} &amp;{5 0xc0000960f0} &amp;{6 0xc000096108} &amp;{7 0xc000096120} &amp;{8 0xc000096138} &amp;{9 &lt;nil&gt;}</code></pre> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-89175.htm">猫疫苗打针多少钱一针（猫疫苗接种多少钱）</a></p>
+                                        <p>下一个：<a href="/news/article-89892.htm">使用 Bitnami PostgreSQL Docker 镜像快速设置流复制集群</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-66610.htm" title="国家规定不允许喂流浪猫（喂流浪猫是积德吗）">国家规定不允许喂流浪猫（喂流浪猫是积德吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-12-node-share.htm" title="VPN台湾 | 3月12日18.5M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点订阅分享">VPN台湾 | 3月12日18.5M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-15-node-share.htm" title="VPN台湾 | 3月15日19.6M/S|免费VPN/SSR/Shadowrocket/V2ray/Clash免费节点订阅分享">VPN台湾 | 3月15日19.6M/S|免费VPN/SSR/Shadowrocket/V2ray/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-81303.htm" title="领养宠物的软件平台叫什么 领养宠物的软件平台叫什么名字">领养宠物的软件平台叫什么 领养宠物的软件平台叫什么名字</a></li>
+                        <li class="py-2"><a href="/news/article-90630.htm" title="宠物粮食行业发展前景分析报告总结范文（宠物粮行业环境分析）">宠物粮食行业发展前景分析报告总结范文（宠物粮行业环境分析）</a></li>
+                        <li class="py-2"><a href="/news/article-67859.htm" title="动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）">动物疫苗价格表图片高清版下载大全（动物疫苗的使用方法及注意事项）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-9-node-share.htm" title="VPN台湾 | 3月9日18.1M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享">VPN台湾 | 3月9日18.1M/S|免费VPN/SSR/Shadowrocket/Clash/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-free-subscribe-node.htm" title="VPN台湾 | 3月3日21.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 3月3日21.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-88443.htm" title="猫三联三针和两针的区别图片（猫三联三针一共多少钱）">猫三联三针和两针的区别图片（猫三联三针一共多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-8-free-v2ray-subscribe.htm" title="VPN台湾 | 3月8日18.6M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享">VPN台湾 | 3月8日18.6M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">24</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
