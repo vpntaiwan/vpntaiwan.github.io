@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-99539.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MySQL 案例分析讲解外连接语法_Mysql</title>
+        <meta name="description" content="目录  前言 左连接 例 1 右连接 例2 作业记录    前言 外连接可以分为左外连接和右外连接 左外连接: 包含左边表的全部行（不管右边的表中是否存在与它们匹配的行），以及右边表中全部匹配的行 右" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-99539.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="MySQL 案例分析讲解外连接语法_Mysql" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/7fb65a9fccfd8ec1bd6ff3b314c46dfc.webp" />
+        <meta property="og:release_date" content="2025-04-19T08:58:34" />
+    <meta property="og:updated_time" content="2025-04-19T08:58:34" />
+        <meta property="og:description" content="目录  前言 左连接 例 1 右连接 例2 作业记录    前言 外连接可以分为左外连接和右外连接 左外连接: 包含左边表的全部行（不管右边的表中是否存在与它们匹配的行），以及右边表中全部匹配的行 右" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MySQL 案例分析讲解外连接语法_Mysql">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>MySQL 案例分析讲解外连接语法_Mysql</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">前言</a></li> <li><a href="#_label1" rel="nofollow">左连接</a></li> <li><a href="#_label2" rel="nofollow">例 1</a></li> <li><a href="#_label3" rel="nofollow">右连接</a></li> <li><a href="#_label4" rel="nofollow">例2</a></li> <li><a href="#_label5" rel="nofollow">作业记录</a></li> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>前言</h2> <p>外连接可以分为左外连接和右外连接</p> <p>左外连接: 包含左边表的全部行（不管右边的表中是否存在与它们匹配的行），以及右边表中全部匹配的行</p> <p>右外连接: 包含右边表的全部行（不管左边的表中是否存在与它们匹配的行），以及左边表中全部匹配的行</p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>左连接</h2> <p>左外连接又称为左连接，使用 LEFT OUTER JOIN 关键字连接两个表，并使用 ON 子句来设置连接条件。</p> <p>左连接的语法格式如下：</p> <blockquote> <p>SELECT &lt;字段名&gt; FROM &lt;表1&gt; LEFT OUTER JOIN &lt;表2&gt;</p> </blockquote> <p>语法说明如下：</p> <p>字段名：需要查询的字段名称。</p> <p>&lt;表1&gt;&lt;表2&gt;：需要左连接的表名。</p> <p>LEFT OUTER JOIN：左连接中可以省略 OUTER 关键字，只使用关键字 LEFT JOIN。</p> <p>ON 子句：用来设置左连接的连接条件，不能省略。</p> <p>上述语法中，“表1”为基表，“表2”为参考表。左连接查询时，可以查询出“表1”中的所有记录和“表2”中匹配连接条件的记录。如果“表1”的某行在“表2”中没有匹配行，那么在返回结果中，“表2”的字段值均为空值（NULL）。</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>例 1</h2> <p>在进行左连接查询之前，我们先查看 tb_course 和 tb_students_info 两张表中的数据。SQL 语句和运行结果如下。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; SELECT * FROM tb_course;    +----+-------------+  | id | course_name |  +----+-------------+  |  1 | Java        |  |  2 | MySQL       |  |  3 | Python      |  |  4 | Go          |  |  5 | C++         |  |  6 | HTML        |  +----+-------------+  6 rows in set (0.00 sec)  mysql&gt; SELECT * FROM tb_students_info;  +----+--------+------+------+--------+-----------+  | id | name   | age  | sex  | height | course_id |  +----+--------+------+------+--------+-----------+  |  1 | Dany   |   25 | 男   |    160 |         1 |  |  2 | Green  |   23 | 男   |    158 |         2 |  |  3 | Henry  |   23 | 女   |    185 |         1 |  |  4 | Jane   |   22 | 男   |    162 |         3 |  |  5 | Jim    |   24 | 女   |    175 |         2 |  |  6 | John   |   21 | 女   |    172 |         4 |  |  7 | Lily   |   22 | 男   |    165 |         4 |  |  8 | Susan  |   23 | 男   |    170 |         5 |  |  9 | Thomas |   22 | 女   |    178 |         5 |  | 10 | Tom    |   23 | 女   |    165 |         5 |  | 11 | LiMing |   22 | 男   |    180 |         7 |  +----+--------+------+------+--------+-----------+  11 rows in set (0.00 sec)  </pre> </div> <p>在 tb_students_info 表和 tb_course 表中查询所有学生姓名和相对应的课程名称，包括没有课程的学生，SQL 语句和运行结果如下。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; SELECT s.name,c.course_name FROM tb_students_info s LEFT OUTER JOIN tb_course c      -&gt; ON s.`course_id`=c.`id`;  +--------+-------------+  | name   | course_name |  +--------+-------------+  | Dany   | Java        |  | Henry  | Java        |  | NULL   | Java        |  | Green  | MySQL       |  | Jim    | MySQL       |  | Jane   | Python      |  | John   | Go          |  | Lily   | Go          |  | Susan  | C++         |  | Thomas | C++         |  | Tom    | C++         |  | LiMing | NULL        |  +--------+-------------+  12 rows in set (0.00 sec)  </pre> </div> <p>可以看到，运行结果显示了 12 条记录，name 为 LiMing 的学生目前没有课程，因为对应的 tb_course 表中没有该学生的课程信息，所以该条记录只取出了 tb_students_info 表中相应的值，而从 tb_course 表中取出的值为 NULL。</p> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>右连接</h2> <p>右外连接又称为右连接，右连接是左连接的反向连接。使用 RIGHT OUTER JOIN 关键字连接两个表，并使用 ON 子句来设置连接条件。</p> <p>语法说明如下：</p> <p>字段名：需要查询的字段名称。</p> <p>&lt;表1&gt;&lt;表2&gt;：需要右连接的表名。</p> <p>RIGHT OUTER JOIN：右连接中可以省略 OUTER 关键字，只使用关键字 RIGHT JOIN。</p> <p>ON 子句：用来设置右连接的连接条件，不能省略。</p> <p>与左连接相反，右连接以“表2”为基表，“表1”为参考表。右连接查询时，可以查询出“表2”中的所有记录和“表1”中匹配连接条件的记录。如果“表2”的某行在“表1”中没有匹配行，那么在返回结果中，“表1”的字段值均为空值（NULL）。</p> <p class="maodian"><a name="_label4" rel="nofollow"></a></p> <h2>例2</h2> <p>在 tb_students_info 表和 tb_course 表中查询所有课程，包括没有学生的课程，SQL 语句和运行结果如下。</p> <div class="ay1code"> <pre class="brush:sql;">mysql&gt; SELECT s.name,c.course_name FROM tb_students_info s RIGHT OUTER JOIN tb_course c      -&gt; ON s.`course_id`=c.`id`;  +--------+-------------+  | name   | course_name |  +--------+-------------+  | Dany   | Java        |  | Green  | MySQL       |  | Henry  | Java        |  | Jane   | Python      |  | Jim    | MySQL       |  | John   | Go          |  | Lily   | Go          |  | Susan  | C++         |  | Thomas | C++         |  | Tom    | C++         |  | NULL   | HTML        |  +--------+-------------+  11 rows in set (0.00 sec)  </pre> </div> <p>可以看到，结果显示了 11 条记录，名称为 HTML 的课程目前没有学生，因为对应的 tb_students_info 表中并没有该学生的信息，所以该条记录只取出了 tb_course 表中相应的值，而从 tb_students_info 表中取出的值为 NULL。</p> <p>多个表左/右连接时，在 ON 子句后连续使用 LEFT/RIGHT OUTER JOIN 或 LEFT/RIGHT JOIN 即可。</p> <p>使用外连接查询时，一定要分清需要查询的结果，是需要显示左表的全部记录还是右表的全部记录，然后选择相应的左连接和右连接。</p> <p class="maodian"><a name="_label5" rel="nofollow"></a></p> <h2>作业记录</h2> <p>先建立 users表</p> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/672e776e95e6183e550e563d800f01a4.jpg"></p> <p>orders表</p> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/779ab0f871f7c436e1c3a427c08a365d.jpg"></p> <div class="ay1code"> <pre class="brush:sql;">-- 查询每个用户的订单购买数量，列出uID，uName，buyNum  SELECT s.uid,s.uName,buyNum  FROM users s LEFT JOIN orders t          ON s.uID=t.uID;  </pre> </div> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/43b192d99ad43db538bbcf540684cb7f.jpg"></p> <div class="ay1code"> <pre class="brush:sql;">--查询每个用户的订单数，列出uID，uName，ordernum(订单数)  SELECT s.uid,s.uName,count(t.uid) as ordernum  FROM orders t RIGHT JOIN users s  				ON s.uid=t.uid  GROUP BY s.uid;  -- 王麻子有两次订单数 其余都是一次  </pre> </div> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/9558762a6af56754156723b3d1483651.jpg"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-98733.htm">重庆宠物领养中心有哪些地方可以领养（重庆宠物领养中心有哪些地方可以领养狗）</a></p>
+                                        <p>下一个：<a href="/news/article-99543.htm">我被猫咬了,没去***,会不会死人（被猫咬伤了没打疫苗要紧吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-6-node-share.htm" title="VPN台湾 | 4月6日18.5M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享">VPN台湾 | 4月6日18.5M/S|免费VPN/V2ray/Clash/Shadowrocket/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-4-free-node-subscribe-links.htm" title="VPN台湾 | 4月4日18.2M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享">VPN台湾 | 4月4日18.2M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-69809.htm" title="动物疫苗出口（动物疫苗市场规模）">动物疫苗出口（动物疫苗市场规模）</a></li>
+                        <li class="py-2"><a href="/news/article-74443.htm" title="小猫10元一只去哪里买好（小猫10元一只去哪里买好呢）">小猫10元一只去哪里买好（小猫10元一只去哪里买好呢）</a></li>
+                        <li class="py-2"><a href="/news/article-96600.htm" title="宠物美容师多少钱一个月工资高（宠物美容师工作时间一般是多少）">宠物美容师多少钱一个月工资高（宠物美容师工作时间一般是多少）</a></li>
+                        <li class="py-2"><a href="/news/article-70476.htm" title="webpack 执行npm run 时，因为版本依赖报的那些错">webpack 执行npm run 时，因为版本依赖报的那些错</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-16-free-high-speed-nodes.htm" title="VPN台湾 | 4月16日20.6M/S|免费VPN/V2ray/Shadowrocket/SSR/Clash免费节点订阅分享">VPN台湾 | 4月16日20.6M/S|免费VPN/V2ray/Shadowrocket/SSR/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-90630.htm" title="宠物粮食行业发展前景分析报告总结范文（宠物粮行业环境分析）">宠物粮食行业发展前景分析报告总结范文（宠物粮行业环境分析）</a></li>
+                        <li class="py-2"><a href="/news/article-72436.htm" title="宠物店亏钱吗（宠物店会亏本吗）">宠物店亏钱吗（宠物店会亏本吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-free-v2ray-subscribe.htm" title="VPN台湾 | 4月3日21.5M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享">VPN台湾 | 4月3日21.5M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
