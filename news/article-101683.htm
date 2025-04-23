@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-101683.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>c++引用折叠</title>
+        <meta name="description" content="目录  一、引用折叠 二、示例解析 三、参考：   &nbsp; &nbsp; &nbsp;由于存在T&amp;&amp;这种万能引用类型，当它作为参数时，有可能被一个左值引用或右值引用的参数初始化，" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-101683.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="c++引用折叠" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/7b42d7b30cb43d51515781e9999051c7.webp" />
+        <meta property="og:release_date" content="2025-04-22T08:25:19" />
+    <meta property="og:updated_time" content="2025-04-22T08:25:19" />
+        <meta property="og:description" content="目录  一、引用折叠 二、示例解析 三、参考：   &nbsp; &nbsp; &nbsp;由于存在T&amp;&amp;这种万能引用类型，当它作为参数时，有可能被一个左值引用或右值引用的参数初始化，" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="c++引用折叠">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>c++引用折叠</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                <div class="xcblog-blog-detail">
+                      				  				  				<div id="content_views" class="htmledit_views"> </h1> <p id="main-toc"><strong>目录</strong></p> <p id="-toc" style="margin-left:0px;"> <p id="%E4%B8%80%E3%80%81%E5%BC%95%E7%94%A8%E6%8A%98%E5%8F%A0-toc" style="margin-left:0px;"><a href="#%E4%B8%80%E3%80%81%E5%BC%95%E7%94%A8%E6%8A%98%E5%8F%A0" title="一、引用折叠" rel="nofollow">一、引用折叠</a></p> <p id="%E4%BA%8C%E3%80%81%E7%A4%BA%E4%BE%8B%E8%A7%A3%E6%9E%90-toc" style="margin-left:0px;"><a href="#%E4%BA%8C%E3%80%81%E7%A4%BA%E4%BE%8B%E8%A7%A3%E6%9E%90" title="二、示例解析" rel="nofollow">二、示例解析</a></p> <p id="%E4%B8%89%E3%80%81%E5%8F%82%E8%80%83%EF%BC%9A-toc" style="margin-left:0px;"><a href="#%E4%B8%89%E3%80%81%E5%8F%82%E8%80%83%EF%BC%9A" title="三、参考：" rel="nofollow">三、参考：</a></p> <hr id="hr-toc"/> </h1> <p>&nbsp; &nbsp; &nbsp;由于存在T&amp;&amp;这种万能引用类型，当它作为参数时，有可能被一个左值引用或右值引用的参数初始化，这是经过类型推导的T&amp;&amp;类型，相比右值引用(&amp;&amp;)会发生类型的变化，这种变化就称为引用折叠。</p> <p>1.所有右值引用折叠到右值引用上仍然是一个右值引用。（A&amp;&amp; &amp;&amp; 变成 A&amp;&amp;）<br /> 2.所有的其他引用类型之间的折叠都将变成左值引用。 （A&amp; &amp; 变成 A&amp;; A&amp; &amp;&amp; 变成 A&amp;; A&amp;&amp; &amp; 变成 A&amp;）</p> </h1> <p>&nbsp; &nbsp; &nbsp; &nbsp;要说引用折叠，首先得说右值引用(在看这个之前需要了解C++11中左值，右值的概念)。它是C++11出现的新概念，声明类型的方法是：T&amp;&amp;，具体信息可以看下面的代码：</p> <pre><code>Class A {     A()     {// do something} };  A GetA() {     return A(); }  int main() {     A a1 = GetA();   // a1是左值     A&amp;&amp; a2 = GetA(); // a2是右值引用     return 0; } </code></pre> <p>&nbsp; &nbsp; &nbsp; a1是左值，在构造时使用了GetA() 产生的临时对象，之后GetA()产生的临时对象会销毁。</p> <p>&nbsp; &nbsp; &nbsp; a2是右值引用，其指向的就是GetA()所产生的对象，这个对象的声明周期是和a2的声明周期是一致的。即少了临时对象，从而省去了临时对象的构造和析构。</p> <p>&nbsp; &nbsp; &nbsp;由此可见右值引用的好处，在新代码中，右值引用是值得大力使用的。但是，在使用的时候，有例外情况了:T&amp;&amp;并不是一定表示右值，比如，如果它绑定的类型是未知的话，既可能是左值，又可能是右值。比如：</p> <pre><code>template&lt;typename T&gt; void f(T&amp;&amp; param) {   std::cout&lt;&lt;param; }  f(10); // 10是右值   int &amp;&amp; int x = 10; f(x);  // x是左值   int &amp; </code></pre> <p>&nbsp; &nbsp; &nbsp; 以上这种万能引用类型(param的类型)能万能引用不同类型的参数,这种类型必须被初始化,而它是左值还是右值则取决于它的初始化，如果被左值初始化，那么它就是左值，反之亦然。那么什么时候是左值，什么时候是右值，就需要进行类型推导才知道。</p> <p>&nbsp; &nbsp; &nbsp; &nbsp;有的人会问，我传入的是一个左值a,并不是一个左值引用，为什么编译器会推导出T 为int &amp;呢。首先，模板函数参数为 T&amp;&amp; param,也就是说，不管T是什么类型，T&amp;&amp;的最终结果必然是一个引用类型。如果T是int, 那么T&amp;&amp; 就是 int &amp;&amp;；如果T为 int &amp;，那么 T &amp;&amp;(int&amp; &amp;&amp;) 就是&amp;，如果T为&amp;&amp;,那么T &amp;&amp;(&amp;&amp; &amp;&amp;) 就是&amp;&amp;。很明显，接受左值的话，T只能推导为int &amp;。</p> <p>&nbsp; &nbsp; &nbsp;总结一下，万能引用就是利用模板推导和引用折叠的相关规则，生成不同的实例化模板来接收传进来的参数。</p> </h1> <p>https://www.zhihu.com/question/40346748/answer/88672920</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://zhuanlan.zhihu.com/p/50816420"  title="引用折叠和完美转发 - 知乎" rel="nofollow">引用折叠和完美转发 - 知乎</a></p> </p></div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-100924.htm">中国动物疫苗生产企业排名前十名（国内动物疫苗生产企业有多少家）</a></p>
+                                        <p>下一个：<a href="/news/article-101684.htm">收狗狗的平台叫什么的简单介绍</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-78527.htm" title="北京野生动物园鹦鹉馆（北京野生动物园鹦鹉馆电话）">北京野生动物园鹦鹉馆（北京野生动物园鹦鹉馆电话）</a></li>
+                        <li class="py-2"><a href="/news/article-89891.htm" title="Go 语言接口及使用接口实现链表插入">Go 语言接口及使用接口实现链表插入</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-free-subscribe-node.htm" title="VPN台湾 | 3月3日21.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 3月3日21.5M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-66608.htm" title="兰州哪里买宠物狗好点（兰州哪里有买狗狗的）">兰州哪里买宠物狗好点（兰州哪里有买狗狗的）</a></li>
+                        <li class="py-2"><a href="/news/article-80582.htm" title="动物医院前台工作内容（动物医院前台工作流程）">动物医院前台工作内容（动物医院前台工作流程）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-19-free-subscribe-node.htm" title="VPN台湾 | 4月19日21.3M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点订阅分享">VPN台湾 | 4月19日21.3M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-free-v2ray-subscribe.htm" title="VPN台湾 | 4月3日21.5M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享">VPN台湾 | 4月3日21.5M/S|免费VPN/SSR/V2ray/Shadowrocket/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-16-clash-v2ray-ss-ssr.htm" title="VPN台湾 | 3月16日22.4M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享">VPN台湾 | 3月16日22.4M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-100924.htm" title="中国动物疫苗生产企业排名前十名（国内动物疫苗生产企业有多少家）">中国动物疫苗生产企业排名前十名（国内动物疫苗生产企业有多少家）</a></li>
+                        <li class="py-2"><a href="/news/article-85557.htm" title="北京免费领养猫咪平台（北京领养猫机构在哪儿）">北京免费领养猫咪平台（北京领养猫机构在哪儿）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">68</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
