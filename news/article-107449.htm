@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-107449.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>java高级用法之:JNA类型映射应该注意的一些问题</title>
+        <meta name="description" content="简介  JNA提供JAVA类型和native类型的映射关系，但是这一种映射关系只是一个大概的映射，我们在实际的应用中还有很多需要注意的事项，本文将会为大家详细讲解在使用类型映射中可能会出现的问题。一起" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-107449.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="java高级用法之:JNA类型映射应该注意的一些问题" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/7fb65a9fccfd8ec1bd6ff3b314c46dfc.webp" />
+        <meta property="og:release_date" content="2025-04-29T08:03:58" />
+    <meta property="og:updated_time" content="2025-04-29T08:03:58" />
+        <meta property="og:description" content="简介  JNA提供JAVA类型和native类型的映射关系，但是这一种映射关系只是一个大概的映射，我们在实际的应用中还有很多需要注意的事项，本文将会为大家详细讲解在使用类型映射中可能会出现的问题。一起" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="java高级用法之:JNA类型映射应该注意的一些问题">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>java高级用法之:JNA类型映射应该注意的一些问题</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div class="toc"> <div class="toc-container-header"><span style="font-size: 2em;">简介</span></div> </div> <p>JNA提供JAVA类型和native类型的映射关系，但是这一种映射关系只是一个大概的映射，我们在实际的应用中还有很多需要注意的事项，本文将会为大家详细讲解在使用类型映射中可能会出现的问题。一起来看看吧。</p> </h1> <p>首先是String的映射，JAVA中的String实际上对应的是两种native类型：const char* 和 const wchar_t<em>。默认情况下String会被转换成为char</em> 。</p> <blockquote> <p>char是ANSI类型的数据类型，而wchar_t是Unicode字符的数据类型,也叫做宽字符。</p> </blockquote> <p>如果JAVA的unicode characters要转换成为char数组，那么需要进行一些编码操作，如果设置了jna.encoding，那么就会使用设置好的编码方式来进行编码。默认情况下编码方式是 "UTF8".</p> <p>如果是WString,那么Unicode values可以直接拷贝到WString中，而不需要进行任何编码。</p> <p>先看一个简单的例子:</p> <pre><code> char* returnStringArgument(char *arg) {   return arg; }  wchar_t* returnWStringArgument(wchar_t *arg) {   return arg; }</code></pre> <p>上面的native代码可以映射为：</p> <pre><code>String returnStringArgument(String s); WString returnWStringArgument(WString s);</code></pre> <p>再来看一个不同的例子，假如native方法的定义是这样的：</p> <pre><code>int getString(char* buffer, int bufsize);  int getUnicodeString(wchar_t* buffer, int bufsize);</code></pre> <p>我们定义了两个方法，方法的参数分别是char* 和wchar_t*。</p> <p>接下来看一下怎么在JAVA中定义方法的映射：</p> <pre><code>// Mapping A: int getString(byte[] buf, int bufsize); // Mapping B: int getUnicodeString(char[] buf, int bufsize);</code></pre> <p>下面是具体的使用：</p> <pre><code>byte[] buf = new byte[256]; int len = getString(buf, buf.length); String normalCString = Native.toString(buf); String embeddedNULs = new String(buf, 0, len);</code></pre> <p>可能有同学会问了，既然JAVA中的String可以转换成为char*，为什么这里需要使用byte数组呢？</p> <p>这是因为getString方法需要对传入的char数组中的内容进行修改，但是因为String是不可变的，所以这里是不能直接使用String的，我们需要使用byte数组。</p> <p>接着我们使用Native.toString(byte[]) 将byte数组转换成为JAVA字符串。</p> <p>再看一个返回值的情况：</p> <pre><code>// Example A: Returns a C string directly const char* getString(); // Example B: Returns a wide character C string directly const wchar_t* getString();</code></pre> <p>一般情况下，如果是native方法直接返回string,我们可以使用String进行映射：</p> <pre><code>// Mapping A String getString(); // Mapping B WString getString();</code></pre> <p>如果native code为String分配了内存空间，那么我们最好使用JNA中的Pointer作为返回值，这样我们可以在未来某些时候，释放所占用的空间,如下所示：</p> <pre><code>Pointer getString();</code></pre> </h1> <p>什么时候需要用到Buffers和Memory呢?</p> <p>一般情况下如果是基础数据的数组作为参数传到函数中的话，可以在JAVA中直接使用基础类的数组来替代。但是如果native方法在方法返回之后，还需要访问数组的话（保存了指向数组的指针），这种情况下使用基础类的数组就不太合适了，这种情况下，我们需要用到ByteBuffers或者Memory。</p> <p>我们知道JAVA中的数组是带有长度的，但是对于native方法来说，返回的数组实际上是一个指向数组的指针，我们并不能知道返回数组的长度，所以如果native方法返回的是数组指针的话，JAVA代码中用数组来进行映射就是不合适的。这种情况下，需要用到Pointer.</p> <p>Pointer表示的是一个指针，先看一下Pointer的例子，首先是native代码：</p> <pre><code>void* returnPointerArgument(void *arg) {   return arg; }  void* returnPointerArrayElement(void* args[], int which) {   return args[which]; }</code></pre> <p>接下来是JAVA的映射：</p> <pre><code>Pointer returnPointerArgument(Pointer p);  Pointer returnPointerArrayElement(Pointer[] args, int which);</code></pre> <p>除了基本的Pointer之外，你还可以自定义带类型的Pointer，也就是PointerType. 只需要继承PointerType即可，如下所示：</p> <pre><code>public static class TestPointerType extends PointerType {             public TestPointerType() { }             public TestPointerType(Pointer p) { super(p); }         } TestPointerType returnPointerArrayElement(TestPointerType[] args, int which);</code></pre> <p>再看一下字符串数组：</p> <pre><code>char* returnStringArrayElement(char* args[], int which) {   return args[which]; }  wchar_t* returnWideStringArrayElement(wchar_t* args[], int which) {   return args[which]; }</code></pre> <p>对应的JAVA映射如下：</p> <pre><code>String returnStringArrayElement(String[] args, int which);  WString returnWideStringArrayElement(WString[] args, int which);</code></pre> <p>对应Buffer来说，JAVA NIO中提供了很多类型的buffer，比如ByteBuffer,ShortBuffer,IntBuffer,LongBuffer,FloatBuffer和DoubleBuffer等。这里以ByteBuffer为例，来看一下具体的使用.</p> <p>首先看下native代码：</p> <pre><code>int32_t fillInt8Buffer(int8_t *buf, int len, char value) {   int i;    for (i=0;i &lt; len;i++) {     buf[i] = value;   }   return len; }</code></pre> <p>这里将buff进行填充，很明显后续还需要使用到这个buffer，所以这里使用数组是不合适的，我们可以选择使用ByteBuffer：</p> <pre><code>int fillInt8Buffer(ByteBuffer buf, int len, byte value);</code></pre> <p>然后看下具体怎么使用：</p> <pre><code>TestLibrary lib = Native.load("testlib", TestLibrary.class);          ByteBuffer buf  = ByteBuffer.allocate(1024).order(ByteOrder.nativeOrder());         final byte MAGIC = (byte)0xED;         lib.fillInt8Buffer(buf, 1024, MAGIC);         for (int i=0;i &lt; buf.capacity();i++) {             assertEquals("Bad value at index " + i, MAGIC, buf.get(i));         }</code></pre> </h1> <p>对于native和JAVA本身来说，都是支持可变参数的，我们举个例子，在native方法中：</p> <pre><code>int32_t addVarArgs(const char *fmt, ...) {   va_list ap;   int32_t sum = 0;   va_start(ap, fmt);    while (*fmt) {     switch (*fmt++) {     case 'd':       sum += va_arg(ap, int32_t);       break;     case 'l':       sum += (int) va_arg(ap, int64_t);       break;     case 's': // short (promoted to 'int' when passed through '...')      case 'c': // byte/char (promoted to 'int' when passed through '...')       sum += (int) va_arg(ap, int);       break;     case 'f': // float (promoted to ‘double’ when passed through ‘...’)     case 'g': // double       sum += (int) va_arg(ap, double);       break;     default:       break;     }   }   va_end(ap);   return sum; }</code></pre> <p>对应的JAVA方法映射如下：</p> <pre><code>public int addVarArgs(String fmt, Number... args);</code></pre> <p>相应的调用代码如下：</p> <pre><code>int arg1 = 1; int arg2 = 2; assertEquals("32-bit integer varargs not added correctly", arg1 + arg2,                      lib.addVarArgs("dd", arg1, arg2));</code></pre> </h1> <p>本文介绍了在使用JNA方法映射中应该注意的一些细节和具体的使用问题。</p> <p>本文的代码：https://github.com/ddean2009/learn-java-base-9-to-20.git</p> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-106398.htm">宠物疫苗批次查询网站（宠物疫苗接种查询）</a></p>
+                                        <p>下一个：<a href="/news/article-107450.htm">宠爱国际动物医院怎么样（宠爱国际宠物医院）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-22-free-node-subscribe-links.htm" title="VPN台湾 | 4月22日20.8M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享">VPN台湾 | 4月22日20.8M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-92833.htm" title="Feign 传输 MultipartFile 的一些问题">Feign 传输 MultipartFile 的一些问题</a></li>
+                        <li class="py-2"><a href="/news/article-104003.htm" title="贫穷养猫VS富养猫（穷养猫富养狗是真的吗）">贫穷养猫VS富养猫（穷养猫富养狗是真的吗）</a></li>
+                        <li class="py-2"><a href="/news/article-106397.htm" title="国内十大猫粮品牌排行榜对比（国内知名猫粮品牌）">国内十大猫粮品牌排行榜对比（国内知名猫粮品牌）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-29-clash-v2ray-ss-ssr.htm" title="VPN台湾 | 4月29日21.4M/S|免费VPN/Shadowrocket/V2ray/Clash/SSR免费节点订阅分享">VPN台湾 | 4月29日21.4M/S|免费VPN/Shadowrocket/V2ray/Clash/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-92114.htm" title="饲料厂加盟多少钱（饲料厂加盟多少钱）">饲料厂加盟多少钱（饲料厂加盟多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-17-free-node-subscribe.htm" title="VPN台湾 | 4月17日22.4M/S|免费VPN/Clash/V2ray/SSR/Shadowrocket免费节点订阅分享">VPN台湾 | 4月17日22.4M/S|免费VPN/Clash/V2ray/SSR/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-4-free-node-subscribe-links.htm" title="VPN台湾 | 4月4日18.2M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享">VPN台湾 | 4月4日18.2M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-1-free-v2ray.htm" title="VPN台湾 | 5月1日18.9M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 5月1日18.9M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-93587.htm" title="开个小型宠物食品加工厂挣钱吗多少钱啊（开宠物食品厂需要什么手续）">开个小型宠物食品加工厂挣钱吗多少钱啊（开宠物食品厂需要什么手续）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

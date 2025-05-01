@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+
+<head>
+        <link rel="canonical" href="https://vpntaiwan.github.io/news/article-109087.htm" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>java class 文件格式解析</title>
+        <meta name="description" content="大约5年前，想研究javaassistant，cglib等字节码操作的相关类库，来对class进行增强，当要到要操作字节码的时候，发现无法继续下去了，看不懂，只能放弃。 学习jvm字节码，需要理解cl" />
+        <link rel="icon" href="/assets/website/img/todayclashnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN台湾 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpntaiwan.github.io/news/article-109087.htm" />
+    <meta property="og:site_name" content="VPN台湾 订阅链接节点中文网" />
+    <meta property="og:title" content="java class 文件格式解析" />
+    <meta property="og:image" content="https://vpntaiwan.github.io/uploads/20240614/e16f6d988548fc12be9b69962f4cf6e9.webp" />
+        <meta property="og:release_date" content="2025-05-01T09:04:10" />
+    <meta property="og:updated_time" content="2025-05-01T09:04:10" />
+        <meta property="og:description" content="大约5年前，想研究javaassistant，cglib等字节码操作的相关类库，来对class进行增强，当要到要操作字节码的时候，发现无法继续下去了，看不懂，只能放弃。 学习jvm字节码，需要理解cl" />
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="java class 文件格式解析">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+    <!-- Lightbox-->
+    <link rel="stylesheet" href="/assets/website/js/frontend/todayclashnode/lightbox2/css/lightbox.css">
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/fontastic.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/assets/website/css/todayclashnode/custom.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6959B057"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HW6959B057');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                                <span>
+                    VPN台湾                </span>
+                                </a>
+
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/news/" class="nav-link">新闻资讯</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/client.htm" class="nav-link">客户端</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section-->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>java class 文件格式解析</h1>
+            <nav aria-label="breadcrumb" class="d-flex justify-content-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="animsition-link">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/" class="animsition-link">新闻资讯</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">正文</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row" id="list">
+                <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				</h1> <p>大约5年前，想研究javaassistant，cglib等字节码操作的相关类库，来对class进行增强，当要到要操作字节码的时候，发现无法继续下去了，看不懂，只能放弃。<br /> 学习jvm字节码，需要理解class的组成方式，对汇编，操作栈比较了解，无奈，只好重新学习编译原理，汇编等知识，再来看jvm规范，现在理解起来，容易很多了。</p> <h2 id="class文件规范">Class文件规范</h2> <p>编译后被 Java 虚拟机所执行的代码使用了一种平台中立（不依赖于特定硬件及操作系统的）<br /> 的二进制格式来表示，并且经常（但并非绝对）以文件的形式存储，因此这种格式被称为 Class<br /> 文件格式。Class 文件格式中精确地定义了类与接口的表示形式，包括在平台相关的目标文件格<br /> 式中一些细节上的惯例</p> <p>相关文档<br />https://docs.oracle.com/javase/specs/jvms/se15/html/jvms-4.html</p> <pre><code>ClassFile {     u4             magic;     u2             minor_version;     u2             major_version;     u2             constant_pool_count;     cp_info        constant_pool[constant_pool_count-1];     u2             access_flags;     u2             this_class;     u2             super_class;     u2             interfaces_count;     u2             interfaces[interfaces_count];     u2             fields_count;     field_info     fields[fields_count];     u2             methods_count;     method_info    methods[methods_count];     u2             attributes_count;     attribute_info attributes[attributes_count]; }</code></pre> <p>下面，我们开始解析每个字段是如何标识出来的<br /> 其中 u4, u2 代表什么意思<br /> u 表示无符号数 后面的数字 表示 占用多少字节<br /> u4 占用4个字节<br /> u2 占用2个字节</p> <ol> <li>magic 占用4个字节，（ca	fe	ba	be ）</li> </ol> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/4c7a2f6597ac9839eefdd72a33abf940.jpg" alt="java class 文件格式解析"></p> <ol start="2"> <li> <p>minor_version 子版本号 ，2个字节数字<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c7ceded47ca77d3af848d47e3fe1981f.jpg" alt="java class 文件格式解析"></p> </li> <li> <p>major_version 主版本好 2个字节的数字</p> </li> </ol> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/4738fb930607c4c62f36f7f8cde050d0.jpg" alt="java class 文件格式解析"></p> <ol start="4"> <li>constant_pool_count 常量池数目 2个字节的数字</li> </ol> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/12efe1e07908943e9046508f4d2ea669.jpg" alt="java class 文件格式解析"></p> <ol start="5"> <li>constant_pool[constant_pool_count-1] 常量池数组</li> </ol> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/bdd37403ebafc0c19cefca5611cf7b85.jpg" alt="java class 文件格式解析"></p> <ol start="6"> <li>access_flags 访问标识  2个字节数字</li> <li>this_class class名称的索引，</li> <li>super_class 超类的名称索引</li> <li>interfaces_count 接口的数目</li> <li>interfaces[interfaces_count]  接口的数组</li> <li>fields_count 字段数目</li> <li>fields[fields_count] 字段的数组</li> <li>methods_count 方法的数目</li> <li>methods[methods_count] 方法的数组</li> <li>attributes_count 属性的数目</li> <li>attributes[attributes_count] 属性的数组</li> </ol> <h2 id="如何自己动手解一个class文件">如何自己动手解一个class文件</h2> <p>相信大部分第一次看到上面的协议时候，能看懂，但是要自己动手解析出每个字段的含义出来，<br /> 就无法下手了，</p> <ol> <li>读取class文件</li> </ol> <pre><code> FileInputStream in= new FileInputStream("d:/my.class");</code></pre> <ol start="2"> <li>读取 magic ，（magic  u4 占用4个字节）</li> </ol> <pre><code> byte[] bytes=new byte[4];        in.read(bytes);</code></pre> <ol start="3"> <li>读取 minor_version u2 占用2个字节</li> </ol> <pre><code> byte[] minorByte=new byte[2];        in.read(minorByte);</code></pre> <ol start="4"> <li>读取 major_version u2 占用2个字节</li> </ol> <pre><code> byte[] majorVersion=new byte[2];        in.read(majorVersion);</code></pre> <p>看到上面的解析，是否明白了，其实还是很有规律的，只要你认真看协议文档（要看好多遍才行）</p> <p>最终解析class 文档就是这样的</p> <pre><code>ClassFile classFile = new ClassFile();          PcBufferInputStream in = new PcBufferInputStream(new FileInputStream(fileName));         classFile.setMagic(readMagic(in));         classFile.setMinorVersion(readMinorVersion(in));         classFile.setMajorVersion(readMajorVersion(in));         classFile.setConstantPoolCount(readConstantPoolCount(in));         classFile.setCpInfo(readCpInfo(in));         classFile.setAccessFlags(readAccessFlags(in));         classFile.setThisClass(readThisClass(in));         classFile.setSuperClass(readSuperClass(in));         classFile.setInterfacesCount(readInterfacesCount(in));         // u2 interfaces interfaces_count         classFile.setInterfaces(readInterfaces(in));         // u2 fields_count         classFile.setFieldsCount(readFieldsCount(in));         // field_info fields fields_count         classFile.setFields(readFields(in));         // u2 methods_count 1         // method_info methods methods_count         classFile.setMethodsCount(readMethodsCount(in));         classFile.setMethods(readMethods(in));         // u2 attribute_count 1         classFile.setAttributeCount(readAttributeCount(in));         // attribute_info attributes attributes_count         classFile.setAttributes(readAttributes(in));         classFile.setPcRecord(recordMap);         return classFile;</code></pre> <blockquote> <p>java class 解析源码开源地址</p> </blockquote> <p>https://gitee.com/venus-suite/java-classViewer</p> <p>如果喜欢，欢迎stars 哦</p> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-108266.htm">新疆宠物狗 新疆宠物狗市场</a></p>
+                                        <p>下一个：<a href="/news/article-109088.htm">mongodb 数据块的迁移流程介绍 &#8211; xinghebuluo</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-28-free-high-speed-nodes.htm" title="VPN台湾 | 4月28日22.6M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享">VPN台湾 | 4月28日22.6M/S|免费VPN/Clash/SSR/V2ray/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-105598.htm" title="有限体积法求解一维非稳态对流扩散方程">有限体积法求解一维非稳态对流扩散方程</a></li>
+                        <li class="py-2"><a href="/news/article-89892.htm" title="使用 Bitnami PostgreSQL Docker 镜像快速设置流复制集群">使用 Bitnami PostgreSQL Docker 镜像快速设置流复制集群</a></li>
+                        <li class="py-2"><a href="/news/article-95854.htm" title="数据建模软件Chiner，颜值与实用性并存">数据建模软件Chiner，颜值与实用性并存</a></li>
+                        <li class="py-2"><a href="/news/article-102481.htm" title="猫宠物疫苗多少钱一次（宠物猫疫苗价格表）">猫宠物疫苗多少钱一次（宠物猫疫苗价格表）</a></li>
+                        <li class="py-2"><a href="/news/article-89174.htm" title="专业养鱼咨询网（养鱼专家咨询）">专业养鱼咨询网（养鱼专家咨询）</a></li>
+                        <li class="py-2"><a href="/news/article-104001.htm" title="一篇文章带你彻底吃透Spring">一篇文章带你彻底吃透Spring</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-1-node-share.htm" title="VPN台湾 | 4月1日19.2M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享">VPN台湾 | 4月1日19.2M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-86981.htm" title="国内猫粮生产厂家有哪些（猫粮生产厂家批发）">国内猫粮生产厂家有哪些（猫粮生产厂家批发）</a></li>
+                        <li class="py-2"><a href="/news/article-107449.htm" title="java高级用法之:JNA类型映射应该注意的一些问题">java高级用法之:JNA类型映射应该注意的一些问题</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <footer class="main-footer">
+        <div class="copyrights">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left">
+                                            <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                        <p class="copyrights-text mb-3 mb-lg-0">
+                          VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="list-inline social mb-0">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook"></i></a><a href="#" class="social-link"><i class="fa fa-twitter"></i></a><a href="#" class="social-link"><i class="fa fa-youtube-play"></i></a><a href="#" class="social-link"><i class="fa fa-vimeo"></i></a><a href="#" class="social-link"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- JavaScript files-->
+    <script src="/assets/website/js/frontend/todayclashnode/jquery/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="/assets/website/js/frontend/todayclashnode/lightbox2/js/lightbox.js"></script>
+    <script src="/assets/website/js/frontend/todayclashnode/front.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
