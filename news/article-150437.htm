@@ -77,7 +77,7 @@
             <div class="container">
                 <a href="/" class="navbar-brand">
                                 <span>
-                    VPN台湾                </span>
+                    台湾VPN精选节点                </span>
                                 </a>
 
                 <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
@@ -85,6 +85,8 @@
                     <ul class="navbar-nav ml-auto">
                                                 <!-- Link-->
                         <li class="nav-item"> <a href="/" class="nav-link">首页</a></li>
+                                                <!-- Link-->
+                        <li class="nav-item"> <a href="/free-nodes/" class="nav-link">免费节点</a></li>
                                                 <!-- Link-->
                         <li class="nav-item"> <a href="/paid-subscribe/" class="nav-link">推荐机场</a></li>
                                                 <!-- Link-->
@@ -114,7 +116,7 @@
         <div class="container">
             <div class="row" id="list">
                 <div class="col-md-9">
-                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node免费节点站" data-url="https://clashnode.github.io">
                 <div class="xcblog-blog-detail xcblog-blog-detail-defined">
                       <h2>引言：当网络自由遇上安全加密</h2>  <p>在数字围墙日益高筑的今天，科学上网工具已成为互联网原住民的生存必需品。而在众多工具中，Quantumult以其精密的流量调度能力和军工级加密支持脱颖而出。本文将彻底拆解一个核心问题——Quantumult对WS TLS协议的支持程度，并带来从原理到落地的完整解决方案。  </p>  <h2>第一章 认识两大技术支柱</h2>  <h3>1.1 Quantumult的基因图谱</h3>  <p>这款诞生于iOS生态的智能代理工具，远非普通VPN可比拟。其核心价值在于：<br /> - <strong>流量手术刀</strong>：可精确到单个域名级别的分流策略<br /> - <strong>协议万花筒</strong>：支持从SS到Trojan等十余种协议栈<br /> - <strong>系统级防护</strong>：通过虚拟网卡实现全局流量接管  </p>  <h3>1.2 WS TLS技术矩阵解析</h3>  <p><strong>WebSocket</strong>的突破性在于：<br /> - 保持TCP长连接的同时实现双向通信<br /> - 完美伪装成常规HTTPS流量<br /> - 首包延迟降低40%以上  </p>  <p>当WS邂逅<strong>TLS 1.3</strong>：<br /> <code>mermaid graph LR A[原始数据] --&gt;|WS封装| B[应用层加密] B --&gt;|TLS 1.3握手| C[传输层加密] C --&gt; D{互联网}</code> 这种双重加密架构使得GFW的深度包检测(DPI)系统如同盲人摸象。</p>  <h2>第二章 兼容性验证实验</h2>  <h3>2.1 实测环境搭建</h3>  <p>我们构建了跨地域测试矩阵：<br /> - 客户端：iPhone 14 Pro (iOS 16.5)<br /> - 服务端：AWS东京节点+阿里云香港节点<br /> - 对照组：Surge/Shadowrocket  </p>  <h3>2.2 关键数据指标</h3>  <p>| 测试项       | Quantumult X | 对照组均值 | |--------------|-------------|------------| | WS握手速度   | 328ms       | 401ms      | | TLS重连成功率| 99.2%       | 97.8%      | | 4K流媒体穿透 | 成功        | 偶现卡顿   |</p>  <p><em>注：连续72小时压力测试数据</em></p>  <h2>第三章 手把手配置实战</h2>  <h3>3.1 配置前的军火准备</h3>  <ul> <li>获取<strong>可用的WS端点</strong>（示例配置片段）：<br /> <code>json { "server": "v2ray.tech", "port": 443, "ws-path": "/ray", "tls": { "sni": "cdn.example.com", "fingerprint": "chrome" } }</code></li> </ul>  <h3>3.2 分步配置指南（iOS版）</h3>  <ol> <li><p><strong>高级参数设定</strong>：  </p>  <ul> <li>在[Proxy]章节添加<code>ws-headers=Host:yourdomain.com</code>  </li> <li>启用<code>tls13=true</code>强制使用最新加密标准  </li> </ul></li> <li><p><strong>流量伪装技巧</strong>：<br /> <code>javascript // 在[URL Rewrite]添加 ^https?://(www.)?gstatic.com/generate_204 url reject</code></p></li> <li><p><strong>智能分流方案</strong>：<br /> <code>ini [Policy] static=Proxy, direct, img-url=https://example.com/icon.png</code></p></li> </ol>  <h3>3.3 避坑指南</h3>  <ul> <li><strong>证书锁定</strong>：当出现<code>TLS handshake timeout</code>时，添加<code>pinned-certificate</code>字段  </li> <li><strong>多路复用</strong>：在WiFi/蜂窝网络切换时启用<code>mptcp=on</code>  </li> <li><strong>速度优化</strong>：调整<code>ws-max-early-data=2048</code>提升首包速度  </li> </ul>  <h2>第四章 安全增强方案</h2>  <h3>4.1 三维防护体系</h3>  <ol> <li><strong>传输层</strong>：启用<code>tls-cert-sha256</code>指纹验证  </li> <li><strong>应用层</strong>：配置每6小时的自动节点轮换  </li> <li><strong>行为层</strong>：结合Quantumult的<code>DNS加密查询</code>功能  </li> </ol>  <h3>4.2 高级对抗策略</h3>  <ul> <li><strong>时间混淆</strong>：设置<code>ws-early-data-header=Date:20230101</code>  </li> <li><strong>流量整形</strong>：添加随机延迟（50-200ms）模拟正常流量  </li> <li><strong>备用端口</strong>：配置<code>fallback=80:http|443:tls</code>应急方案  </li> </ul>  <h2>第五章 性能调优手册</h2>  <h3>5.1 速度瓶颈诊断</h3>  <p>使用内置的<code>网络诊断</code>工具时，重点关注：<br /> - <code>WS Upgrade</code>阶段耗时<br /> - <code>TLS 1.3</code>握手RTT值<br /> - 首字节到达时间(TTFB)  </p>  <h3>5.2 黄金参数组合</h3>  <p><code>yaml tuning:   ws-read-buffer: 8192   tls-session-ticket: true     tls-psk: auto_renew   udp-relay: hybrid</code></p>  <h2>结语：在钢丝上跳芭蕾的艺术</h2>  <p>Quantumult对WS TLS的支持不仅停留在"能用"层面，更通过深度优化达到了<strong>艺术级</strong>的协议实现。那些看似晦涩的配置参数，实则是开发者与审查系统斗智斗勇的智慧结晶。正如某位匿名开发者所言："我们不是在破坏规则，而是在重建互联网本该有的模样。"  </p>  <p><strong>未来展望</strong>：随着QUIC协议的普及，期待Quantumult带来更革命性的协议支持。毕竟在这场没有硝烟的战争中，技术进化永无止境。  </p>  <blockquote>   <p>"加密不是特权，而是数字时代的基本人权。" —— 布鲁斯·施奈尔  </p> </blockquote>  <p>（全文共计2178字，涵盖12个技术要点，6组实测数据，3套配置方案）</p>                 </div>
                 <div class="clearfix"></div>
@@ -130,16 +132,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-8-18-share-vpn.htm" title="乍得VPN | 8月18日19.5M/S|免费Shadowrocket/SSR/Clash/V2ray免费节点订阅分享">乍得VPN | 8月18日19.5M/S|免费Shadowrocket/SSR/Clash/V2ray免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-15-node-share.htm" title="乍得VPN | 8月15日22.6M/S|免费SSR/V2ray/Shadowrocket/Clash免费节点订阅分享">乍得VPN | 8月15日22.6M/S|免费SSR/V2ray/Shadowrocket/Clash免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-5-vpn-free.htm" title="乍得VPN | 8月5日18.1M/S|免费SSR/Shadowrocket/V2ray/Clash免费节点订阅分享">乍得VPN | 8月5日18.1M/S|免费SSR/Shadowrocket/V2ray/Clash免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-152214.htm" title="科学上网的隐秘博弈：风险规避与安全策略深度解析">科学上网的隐秘博弈：风险规避与安全策略深度解析</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-10-vpn-free.htm" title="乍得VPN | 8月10日20.9M/S|免费V2ray/Shadowrocket/SSR/Clash免费节点订阅分享">乍得VPN | 8月10日20.9M/S|免费V2ray/Shadowrocket/SSR/Clash免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-12-vpn-free.htm" title="乍得VPN | 8月12日22.9M/S|免费V2ray/Clash/SSR/Shadowrocket免费节点订阅分享">乍得VPN | 8月12日22.9M/S|免费V2ray/Clash/SSR/Shadowrocket免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-14-free-node-subscribe-links.htm" title="乍得VPN | 8月14日21M/S|免费Clash/V2ray/SSR/Shadowrocket免费节点订阅分享">乍得VPN | 8月14日21M/S|免费Clash/V2ray/SSR/Shadowrocket免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-19-mianfei-vpn.htm" title="乍得VPN | 8月19日22.9M/S|免费Clash/V2ray/Shadowrocket/SSR免费节点订阅分享">乍得VPN | 8月19日22.9M/S|免费Clash/V2ray/Shadowrocket/SSR免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-8-free-node-subscribe.htm" title="乍得VPN | 8月8日21.4M/S|免费SSR/Clash/V2ray/Shadowrocket免费节点订阅分享">乍得VPN | 8月8日21.4M/S|免费SSR/Clash/V2ray/Shadowrocket免费节点订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-11-vpn-proxy.htm" title="乍得VPN | 8月11日21.7M/S|免费SSR/Clash/Shadowrocket/V2ray免费节点订阅分享">乍得VPN | 8月11日21.7M/S|免费SSR/Clash/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-8-free-node-subscribe.htm" title="乍得VPN | 8月8日21.4M/S|免费SSR/Clash节点/V2ray节点/Shadowrocket免费节点订阅分享">乍得VPN | 8月8日21.4M/S|免费SSR/Clash节点/V2ray节点/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-20-mianfei-vpn.htm" title="VPN台湾 | 9月20日18.3M/S|免费VPN/SSR/V2ray节点/Clash节点/Shadowrocket免费节点订阅分享">VPN台湾 | 9月20日18.3M/S|免费VPN/SSR/V2ray节点/Clash节点/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-151513.htm" title="Clash for Windows 是否收费？深度剖析这款代理工具的价值与体验">Clash for Windows 是否收费？深度剖析这款代理工具的价值与体验</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-21-free-node-subscribe-links.htm" title="乍得VPN | 8月21日18.9M/S|免费V2ray节点/SSR/Shadowrocket节点/Clash免费节点订阅分享">乍得VPN | 8月21日18.9M/S|免费V2ray节点/SSR/Shadowrocket节点/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-150437.htm" title="Quantumult深度解析：全面支持WS TLS协议的安全配置指南与实战教程">Quantumult深度解析：全面支持WS TLS协议的安全配置指南与实战教程</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-20-free-vpn.htm" title="乍得VPN | 8月20日21M/S|免费Clash节点/V2ray节点/SSR/Shadowrocket免费节点订阅分享">乍得VPN | 8月20日21M/S|免费Clash节点/V2ray节点/SSR/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-17-top-vpn.htm" title="VPN台湾 | 9月17日18.1M/S|免费VPN/Shadowrocket节点/Clash节点/SSR/V2ray免费节点订阅分享">VPN台湾 | 9月17日18.1M/S|免费VPN/Shadowrocket节点/Clash节点/SSR/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-6-free-vpn-node.htm" title="乍得VPN | 8月6日19.3M/S|免费Clash节点/SSR/Shadowrocket节点/V2ray免费节点订阅分享">乍得VPN | 8月6日19.3M/S|免费Clash节点/SSR/Shadowrocket节点/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-16-free-vpn.htm" title="VPN台湾 | 9月16日18.4M/S|免费VPN/SSR/Shadowrocket节点/Clash节点/V2ray免费节点订阅分享">VPN台湾 | 9月16日18.4M/S|免费VPN/SSR/Shadowrocket节点/Clash节点/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-18-node-share-links.htm" title="VPN台湾 | 9月18日18.8M/S|免费VPN/Shadowrocket节点/V2ray节点/Clash节点/SSR免费节点订阅分享">VPN台湾 | 9月18日18.8M/S|免费VPN/Shadowrocket节点/V2ray节点/Clash节点/SSR免费节点订阅分享</a></li>
                     </ul>
     </div>
 </div>
@@ -151,7 +153,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-09/" title="2025-09 归档">2025-09</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-09/" title="2025-09 归档">2025-09</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">28</span> <a href="/date/2025-08/" title="2025-08 归档">2025-08</a></h4>
@@ -171,8 +173,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 text-center text-lg-left">
-                                            <p>
+                                            <p>本站内容仅供学习与技术研究用途，无意传播或倡导任何违反法律法规的行为。在此声明：用户须自行了解所在地法律法规，合法合规使用；因使用不当产生的法律责任，与本站及作者无关；请在使用前仔细阅读本声明，继续使用即视为同意以上条款。</p>
+                    <p>
                                                 <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
                                                 <a href="/paid-subscribe/">推荐机场</a> |
                                                 <a href="/news/">新闻资讯</a> |
                                                 <a href="/client.htm">客户端</a> |
@@ -181,7 +185,7 @@
                         <a href="/privacy.htm">隐私申明</a> |
                         <a href="/sitemap.xml">网站地图</a>
                     </p>
-                        <p class="copyrights-text mb-3 mb-lg-0">
+                                            <p class="copyrights-text mb-3 mb-lg-0">
                           VPN台湾 订阅链接节点中文网 版权所有 Powered by WordPress
                         </p>
                     </div>
